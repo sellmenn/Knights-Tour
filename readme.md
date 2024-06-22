@@ -52,7 +52,7 @@ The backbone to solving the problem, this function takes in a single argument 'p
 5. If no available moves can be generates at a square, the **backtrack** function is called.
 
 ### backtrack(piece)
-In this project's implementation of backtracking, we rely on 'coordinate' in the Solution class to identify branches in the knight piece's path, and remove moves from 'path' in the solution class until the previous branch is located (last coordinate in 'path' matches 'coordinate' for last node in frontier). Essentially, when backtrack is called:
+In this project's implementation of backtracking, we rely on 'coordinate' in the Node class to identify branches in the knight piece's path, and remove moves from 'path' in the Solution class until the previous branch is located (last coordinate in 'path' matches 'coordinate' for last node in frontier). Essentially, when backtrack is called:
 1. Move knight piece 1 step back
 2. If current coordinate does not match most recent node's 'coordinate' in frontier, no other moves can be made from current coordinate. Go back to step 1.
 Hence, we recursively call backtrack until a differnt path is found.
