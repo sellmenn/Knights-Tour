@@ -31,7 +31,7 @@ Notably, the Knight class contains the following instance methods crucial to tac
 * self.informed_move() returns a legal move with the fewest successive moves
 * self.sorted_moves() returns a list of legal moves, sorted according to Warnsdorff’s Rule.
 
-## Solve.py
+## solve.py
 
 ### Solution Class
 To aid in the ease of passing multiple data types between functions, the **Solution** class contains information about the solutions to the problem. For example: path taken to final solution, frontier, number of unique obtained solutions, time taken to obtain solutions.
@@ -49,7 +49,7 @@ The backbone to solving the problem, this function takes in a single argument 'p
 2. A node is removed from the frontier, containing the next possible best move.
 3. Knight object is moved to the new coordinate, according to the node.
 4. If the frontier is empty, then there are no more moves to be played, and the function terminates.
-5. If no available moves can be generates at a square, the **backtrack** function is called.
+5. If no available moves can be generated at a square, the **backtrack** function is called.
 
 ### backtrack(piece)
 In this project's implementation of backtracking, we rely on 'coordinate' in the Node class to identify branches in the knight piece's path, and remove moves from 'path' in the Solution class until the previous branch is located (last coordinate in 'path' matches 'coordinate' for last node in frontier). Essentially, when backtrack is called:
