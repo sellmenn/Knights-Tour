@@ -24,9 +24,9 @@ The project includes two files:
 
 ## Board and Knight Class
 The Board class includes instance methods to simulate a chess board.
-The Knight class includes instance methods to simulate a chess knight piece.
+The Knight class includes instance methods to simulate a knight chess piece.
 
-Notably, the Knight class contains the following instance methods cruicial to tackling the problem.
+Notably, the Knight class contains the following instance methods crucial to tackling the problem.
 * self.available_moves() returns a list of legal moves - moves within the confines of the board which have not been visitied
 * self.informed_move() returns a legal move with the fewest successive moves
 * self.sorted_moves() returns a list of legal moves, sorted according to Warnsdorff’s Rule.
