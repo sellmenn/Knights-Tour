@@ -12,7 +12,7 @@
 # PROJECT DESCRIPTION
 This project aims to find solutions to the open variant of the Knight's Tour problem, given a board with sides of N squares.
 
-The code was initially designed around a backtracking approach, incorporating the use of a frontier with a stack (LIFO) configuration, to obtain a single solution. However, upon testing, it was found that past N = 7, the code would take too long to run, with iterations in excess of 10000000 required before a solution could be found.
+The code was initially designed around a naive backtracking approach, incorporating the use of a frontier with a stack (LIFO) configuration, to obtain a single solution. However, upon testing, it was found that past N = 7, the code would take too long to run, with iterations in excess of 10000000 required before a solution could be found.
 
 To overcome this obstacle, a version of Warnsdorff’s Rule was used to approach the problem, in addition to backtracking. Always move the knight to an adjacent, unvisited square with minimal degree. Starting from any square, the knight must move to an unvisited square that has the fewest successive moves.
 
