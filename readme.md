@@ -36,7 +36,7 @@ At this point, the program was able to reliably find solutions to the open varia
 - 6*6 board, MAX=5000000, START=(0,0), H_PROB=0.4, 234 Solutions found.
 
 ####
-It is interesting to note that the heuristic function has greater utility in searchig for solutions to the open variant, in contrast with that of the closed variant. This relationship is currently being explored to improve the program's performance in generating solutions to the closed variant in future iterations.
+It is interesting to note that the heuristic function has greater utility in searchig for solutions to the open variant, in contrast with that of the closed variant. This relationship is currently being explored to improve the program's performance in generating solutions to the closed variant in future iterations of this project.
 
 # PROJECT CONTENT
 
