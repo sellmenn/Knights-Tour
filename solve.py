@@ -6,9 +6,9 @@ from game import *
 N = 8 # Default length of board of size N*N
 MAX = 5000000 # Cycle limit for search algorithm
 START = (0,0) # Initial position of piece
-H_PROB = 0.4 # Probability that Warnsdorff’s Rule is conformed to when adding Node objects to Frontier
-VAR = "OPEN" # Knights Tour Variation (OPEN or CLOSED)
-FILE_NAME = "Solutions/OpenTour.txt" # Save solutions to this default file name
+H_PROB = 1 # Probability that Warnsdorff’s Rule is conformed to when adding Node objects to Frontier
+VAR = "OPEN" # 'Open' or 'Closed' Knight's Tour
+FILE_NAME = "Solutions/OpenTour.txt" # Save solutions to this file name
 
 class Frontier:
     def __init__(self):
@@ -38,17 +38,16 @@ def main():
     except:
         print("Usage: python3 solve.py open/closed int filename.txt")
         return 1
-
     # Inititalise Knight and Board objects
     piece = Knight(position=START, board=Board(length=N))
     # Show start board state in terminal
-    print(f"\nSearch for {VAR.capitalize()} Knights-Tour solutions in board of size {N}*{N}, H_PROB={H_PROB}, with starting position on {START}:\n")
+    print(f"\nSearch for {VAR.capitalize()} Knight's Tours\nBoard Length: {N}*{N}\nH_PROB: {H_PROB}\nStart: {START}\n")
     piece.board.mark(piece.position, piece.counter)
     print(f"{piece.board}\n")
     # Search for solutions
     solutions = search_path(piece)
     if solutions:
-        print(f"\n{solutions} solutions found.\nSolutions saved to {FILE_NAME}.\n")
+        print(f"\n{solutions} tours found.\nSolutions saved to {FILE_NAME}.\n")
     else:   
         print(f"\nNo solutions found.\n")
     
@@ -92,11 +91,11 @@ def search_path(piece, start=START, h_prob=H_PROB, var=VAR, limit=MAX, file_name
                 if var == "CLOSED" and piece.closed_tour(piece.position, start):
                     solution_count += 1
                     # Write solution into file
-                    write_solution(piece.board.map, solution_count, file_name, h_prob, start)
+                    write_solution(piece, solution_count, file_name, h_prob, start, var)
                 elif var == "OPEN" and not piece.closed_tour(piece.position, start):
                     solution_count += 1
                     # Write solution into file
-                    write_solution(piece.board.map, solution_count, file_name, h_prob, start)
+                    write_solution(piece, solution_count, file_name, h_prob, start, var)
             # For new position, find playable moves
             available_moves = piece.sorted_moves(h_prob)
             # If playable moves exist
@@ -138,10 +137,11 @@ def backtrack(piece, frontier):
             backtrack(piece, frontier)
 
 
-def write_solution(map, solution_count, file_name, h_prob, start):
+def write_solution(piece, solution_count, file_name, h_prob, start, var):
+    map = piece.board.map
     if solution_count == 1:
         with open(file_name, "w") as file:
-            file.write(f"Solutions for {N}*{N} {VAR.capitalize()} Knights-Tour Problem, H_PROB={h_prob}, with piece initially at {start}:\n\n")
+            file.write(f"{piece.board.length}*{piece.board.length} {var.capitalize()} Knight's Tour Problem, H_PROB={h_prob}, start at {start}:\n\n")
     with open(file_name, "a") as file: 
         file.write(f"Solution {solution_count}:\n")
         for row in map:
