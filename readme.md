@@ -31,21 +31,21 @@ Later, the scope was expanded to include the closed variant of the problem.  Dur
 # PROJECT IMPLEMENTATION
 The project includes two files: 
 1. game.py - contains the **Board** and **Knight** class.
-2. solve.py - contains the **Stack** and **Node** class, **search_path()** and **backtrack()**.
+2. solve.py - contains the **Stack** and **Node** class, **search_path()** and **backtrack**.
 
 ## Board Class
 This class includes instance methods to simulate a chess board. The Board class contains a 'map' attribute which stores the layout of the board as a list, as well as a 'length' attribute.
 * self.create() takes in an optional 'map' argument of type list, and assigns it to the 'map' attribute. If none is provided, it defaults to creating a 'map' according to its 'length' attribute.
 * self.mark() takes in a 'coordinate' and 'marker' as arguments. It assigns the marker to the coordinate specified in the 'map' attribute.
 * self.unmark() takes in a 'coordinate' as an argument, and resets the coordinate specified in the 'map' attribute to 0.
-* self.check_board() returns True if all coordinates in the 'map' attribute have been marked, and False otherwise.
+* self.complete() returns True if all coordinates in the 'map' attribute have been marked, and False otherwise.
 * self.check_square() returns True if the specified coordinate in the 'map' attribute has been marked, and False otherwise.
 
 ## Knight Class
 This class includes instance methods to simulate a knight chess piece. The Knight class contains a 'path' attribute which keeps tracks of coordinates a Knight object has visited, a Board object, a 'counter' attribute which tracks the number of squares it has already traversed on a Board, and a 'position' attribute which represents the Knight object's current coordinate on the Board object.
 Notably, it contains the following instance methods crucial to tackling the problem.
 * self.available_moves() returns a list of legal moves within the confines of the board. It takes in an optional bool argument 'visited' to configure if previously visited coordinates should be excluded or not.
-* self.informed_move() returns a legal move with the fewest successive moves.
+* self.informed_move() returns a legal move with the fewest available successive moves.
 * self.sorted_moves() returns a list of legal moves, sorted according to Warnsdorff’s Rule. It takes in an optional argument 'prob' which determines whether or not the rule is conformed to.
 * self.closed_tour() takes in 2 coordinates as arguments, and returns True if they are one move apart from each other.
 

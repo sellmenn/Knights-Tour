@@ -65,9 +65,8 @@ def search_path(piece, start=START, h_prob=H_PROB, var=VAR, limit=MAX, file_name
     available_moves = piece.sorted_moves(h_prob)
     # Create new node for each playable move
     for move in available_moves:
-        new_node = Node(current_position, move)
         # Add new node to frontier
-        frontier.add(new_node)
+        frontier.add(Node(current_position, move))
     with Bar("Searching...", max=limit) as bar:
         # While cycle limit is not exceeded
         for i in range(limit):
@@ -87,7 +86,7 @@ def search_path(piece, start=START, h_prob=H_PROB, var=VAR, limit=MAX, file_name
             # Add current position to path
             path.append(current_position)
             # Check if board has been fully filled
-            if piece.board.check_board():
+            if piece.board.complete():
                 if var == "CLOSED" and piece.closed_tour(piece.position, start):
                     solution_count += 1
                     # Write solution into file
@@ -102,9 +101,8 @@ def search_path(piece, start=START, h_prob=H_PROB, var=VAR, limit=MAX, file_name
             if available_moves:
                 # Create new node for each playable move
                 for move in available_moves:
-                    new_node = Node(current_position, move)
                     # Add new node to frontier
-                    frontier.add(new_node)
+                    frontier.add(Node(current_position, move))
             # If no playable moves exist, backtrack
             elif not available_moves and frontier.list:
                 backtrack(piece, frontier)

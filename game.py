@@ -35,7 +35,7 @@ class Board:
         self.map[x][y] = 0
 
     # Function to check if all of board has been marked
-    def check_board(self):
+    def complete(self):
         for row in self.map:
             for square in row:
                 if not square:
