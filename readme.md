@@ -1,5 +1,4 @@
 # THE KNIGHT'S TOUR PROBLEM
-
 This project aims to find solutions to both open and closed variants of the Knight's Tour problem.
 
 "A knight's tour is a sequence of moves of a knight on a chessboard such that the knight visits every square exactly once. If the knight ends on a square that is one knight's move from the beginning square (so that it could tour the board again immediately, following the same path), the tour is closed (or re-entrant); otherwise, it is open." - Wikipedia
@@ -22,19 +21,14 @@ Later, the scope was expanded to include the closed variant of the problem.  Dur
 **Open Variant:**
 - MAX = 5000000, START = (0,0), H_PROB = 1, 17521 solutions found.
 - MAX = 5000000, START = (3,3), H_PROB = 1, 4613 solutions found.
-- MAX = 5000000, START = (0,0), H_PROB = 0.4, 0 solutions found.
-- MAX = 5000000, START = (3,3), H_PROB = 0.8, 578 solutions found.
 
 **Closed Variant:**
 - MAX = 5000000, START = (3,3), H_PROB = 1, 1786 solutions found.
-- MAX = 5000000, START = (0,0), H_PROB = 1, 0 solutions found.
 - MAX = 5000000, START = (3,3), H_PROB = 0.8, 1259 solutions found.
-- MAX = 5000000, START = (0,0), H_PROB = 0.8, 0 solutions found.
 
 
 
 # PROJECT IMPLEMENTATION
-
 The project includes two files: 
 1. game.py - contains the **Board** and **Knight** class.
 2. solve.py - contains the **Stack** and **Node** class, **search_path()** and **backtrack**.
