@@ -20,18 +20,16 @@ Later, the scope was expanded to include the closed variant of the problem.  Dur
 ### Suggested Configurations for a 8*8 Board
 **Open Variant:**
 - MAX = 5000000, START = (0,0), H_PROB = 1, 17521 solutions found.
-- MAX = 5000000, START = (3,3), H_PROB = 1, 4613 solutions found.
 
 **Closed Variant:**
 - MAX = 50000000, START = (3,3), H_PROB = 1, 14207 solutions found.
-- MAX = 5000000, START = (3,3), H_PROB = 0.8, 1259 solutions found.
 
 
 
 # PROJECT IMPLEMENTATION
 The project includes two files: 
 1. game.py - contains the **Board** and **Knight** class.
-2. solve.py - contains the **Stack** and **Node** class, **search_path()** and **backtrack**.
+2. solve.py - contains the **Stack** and **Node** class, **search_path()** and **backtrack()**.
 
 ## Board Class
 This class includes instance methods to simulate a chess board. The Board class contains a 'map' attribute which stores the layout of the board as a list, as well as a 'length' attribute.
