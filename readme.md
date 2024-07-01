@@ -7,10 +7,10 @@
 # PROJECT DESCRIPTION
 This project aims to find solutions to both open and closed variants of the Knight's Tour problem, given a board with sides of length N squares.
 
-#### Inititally, the project's scope only included the open variant of the problem.
+#### The project's scope was initially limited to the open variant of the problem.
 The code was designed around a naive backtracking approach, incorporating the use of a frontier with a stack (LIFO) configuration, to obtain a single solution. However, upon testing, it was found that past N = 7, the code would take too long to run, with iterations in excess of 10000000 required before a single solution could be found. To overcome this obstacle, a version of Warnsdorff’s Rule was used to approach the problem, in addition to backtracking: Always move the knight to an adjacent, unvisited square with minimal degree. Starting from any square, the knight must move to an unvisited square that has the fewest successive moves. With this technique, it was found that only a fraction of the original iterations was required to generate a single solution. This opened up the possibility of searching for multiple solutions to the open problem, hence the project was modified to generate multiple solutions instead.
 
-#### The project's scope was later expanded to include the closed variant of the problem.
+#### The scope was later expanded to include the closed variant of the problem.
 At this point, the program was able to reliably find solutions to the open variant. In a span of 2 minutes, the program was able to find 30000 unique solutions to the variant. During experimentation to search for solutions for the closed variant, it was found that the program would crash prematurely before any solution could be found. To circumvent this, the code was modified to write solutions directly to a text file, instead of storing solutions in memory. It was also found that when the program did not entirely conform to Warnsdorff’s Rule, solutions were found more quickly for this variant of the problem. Hence, a new global variable 'H_PROB' was added to the program to allow for configuration of how much the rule is adhered to.
 
 
@@ -35,7 +35,8 @@ At this point, the program was able to reliably find solutions to the open varia
 - 6*6 board, MAX=10000000, START=(0,0), H_PROB=0.5, 114 Solutions found.
 - 6*6 board, MAX=5000000, START=(0,0), H_PROB=0.4, 234 Solutions found.
 
-It is interesting to note that the heuristic function has greater utility in searchig for solutions to the open variant, in contrast with that of the closed variant.
+####
+It is interesting to note that the heuristic function has greater utility in searchig for solutions to the open variant, in contrast with that of the closed variant. This relationship is currently being explored to improve the program's performance in generating solutions to the closed variant in future iterations.
 
 # PROJECT CONTENT
 
