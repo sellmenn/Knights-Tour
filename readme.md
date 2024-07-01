@@ -23,7 +23,7 @@ Later, the scope was expanded to include the closed variant of the problem.  Dur
 - MAX = 5000000, START = (3,3), H_PROB = 1, 4613 solutions found.
 
 **Closed Variant:**
-- MAX = 5000000, START = (3,3), H_PROB = 1, 1786 solutions found.
+- MAX = 50000000, START = (3,3), H_PROB = 1, 14207 solutions found.
 - MAX = 5000000, START = (3,3), H_PROB = 0.8, 1259 solutions found.
 
 

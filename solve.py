@@ -4,11 +4,11 @@ from progress.bar import Bar
 from game import *
 
 N = 8 # Default length of board of size N*N
-MAX = 5000000 # Cycle limit for search algorithm
-START = (0,0) # Initial position of piece
+MAX = 50000000 # Cycle limit for search algorithm
+START = (3,3) # Initial position of piece
 H_PROB = 1 # Probability that Warnsdorff’s Rule is conformed to when adding Node objects to Frontier
-VAR = "OPEN" # 'Open' or 'Closed' Knight's Tour
-FILE_NAME = "Solutions/OpenTour.txt" # Save solutions to this file name
+VAR = "CLOSED" # 'Open' or 'Closed' Knight's Tour
+FILE_NAME = "Solutions/ClosedTour.txt" # Save solutions to this file name
 
 class Frontier:
     def __init__(self):
@@ -107,7 +107,7 @@ def search_path(piece, start=START, h_prob=H_PROB, var=VAR, limit=MAX, file_name
             elif not available_moves and frontier.list:
                 backtrack(piece, frontier)
             bar.next()
-    print(f"\nSearch completed in {time.time() - start_time} seconds.")
+    print(f"\nSearch completed in {(time.time() - start_time):.4f} seconds.")
     return solution_count
 
 
