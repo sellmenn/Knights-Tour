@@ -18,8 +18,7 @@ class Frontier:
 
 class Stack(Frontier):
     def remove(self):
-        return_value = self.list.pop(-1)
-        return return_value
+        return self.list.pop(-1)
 
 # Class to pass data between functions
 class Solution:
@@ -90,10 +89,8 @@ def search_path(piece):
     # Create empty path and frontier
     solution = Solution()
     frontier, path = solution.frontier, solution.path
-
     # keep track of solutions
     solutions = solution.data
-
     # Time tracking
     start_time = time.time()
 
@@ -110,22 +107,17 @@ def search_path(piece):
     with Bar("Searching...", max=MAX) as bar:
         # While cycle limit is not exceeded
         for i in range(MAX):
-
             # If frontier is empty, no solutions exist
             if not frontier.list:
                 break
-            
             # Pick a node from frontier
             node = frontier.remove()
-
             # Move piece to new position
             piece.move(node.next)
             # Add to move count
             piece.counter += 1
-
             # Update current position
             current_position = piece.position
-
             # Mark position as played
             piece.board.mark_board(current_position, piece.counter)
             # Add current position to path
@@ -140,7 +132,6 @@ def search_path(piece):
 
             # For new position, find playable moves
             available_moves = piece.sorted_moves()
-
             # If playable moves exist
             if available_moves:
                 # Create new node for each playable move
@@ -149,7 +140,6 @@ def search_path(piece):
                     # Add new node to frontier
                     frontier.add(new_node)
     
-
             # If no playable moves exist, backtrack
             elif not available_moves and frontier.list:
                 backtrack(piece, solution)
@@ -157,7 +147,6 @@ def search_path(piece):
             bar.next()
 
     solution.time = time.time() - start_time
-
     return solution
 
 
@@ -165,29 +154,22 @@ def backtrack(piece, solution):
         # Access frontier and path
         frontier = solution.frontier
         path = solution.path
-
         # If unexplored path exists, stop backtracking
         if piece.position == frontier.list[-1].coordinate:
             return True
-
         # Unmark current position
         current_position = piece.position
         piece.board.unmark_board(current_position)
-
         # Minus from move count
         piece.counter -= 1
-
         # Remove position from path
         path.pop(-1)
-
         # If backtracked to start or frontier is empty, return False
         if len(path) == 0:
             return False
-        
         # Move piece to previous position
         piece.move(path[-1])
         current_position = piece.position
-
         # If current position has no unexplored paths, recursively backtrack
         if piece.position != frontier.list[-1].coordinate:
             backtrack(piece, solution)
