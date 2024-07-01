@@ -21,18 +21,20 @@ class Stack(Frontier):
         return_value = self.list.pop(-1)
         return return_value
 
+# Class to pass data between functions
 class Solution:
     def __init__(self, path = list(), frontier = Stack()):
-        self.path = path
-        self.frontier = frontier
-        self.solutions = list()
-        self.n = 0 # N value
+        self.path = path # Stores path of Knight object
+        self.frontier = frontier # Stores nodes
+        self.data = list() # Store deep copies of solutions
+        self.n = 0 # N value - length of Board object
         self.time = 0.0 # Time taken to obtain solutions
         self.length = 0 # Number of solutions
 
+# Class to locate branches in Knight object's path
 class Node:
     def __init__(self, coordinate, next):
-        self.coordinate = coordinate
+        self.coordinate = coordinate # Coordinate
         self.next = next
 
 
@@ -58,7 +60,7 @@ def main():
 
     # Solve function
     solution = search_path(piece)
-    solutions = solution.solutions
+    solutions = solution.data
     solution.n = n
 
     # If solutions exist, print solutions
@@ -70,7 +72,7 @@ def main():
 
 
 def write_solution(solution, file_name):
-    solutions = solution.solutions
+    solutions = solution.data
     n = solution.n
     count = 0
     with open(file_name, "w") as file:
@@ -90,7 +92,7 @@ def search_path(piece):
     frontier, path = solution.frontier, solution.path
 
     # keep track of solutions
-    solutions = solution.solutions
+    solutions = solution.data
 
     # Time tracking
     start_time = time.time()
