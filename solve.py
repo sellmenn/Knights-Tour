@@ -1,13 +1,14 @@
 import time
 import sys
-from copy import deepcopy
 from progress.bar import Bar
 from game import *
 
 N = 8 # Default length of board of size N*N
-MAX = 500000 # Cycle limit for search algorithm
+MAX = 5000000 # Cycle limit for search algorithm
 START = (0,0) # Initial position of piece
-FILE_NAME = "solutions.txt" # Save solutions to this default file name
+H_PROB = 0.4 # Probability that Warnsdorff’s Rule is conformed to when adding Node objects to Frontier
+VAR = "OPEN" # Knights Tour Variation (OPEN or CLOSED)
+FILE_NAME = "Solutions/OpenTour.txt" # Save solutions to this default file name
 
 class Frontier:
     def __init__(self):
@@ -20,93 +21,57 @@ class Stack(Frontier):
     def remove(self):
         return self.list.pop(-1)
 
-# Class to pass data between functions
-class Solution:
-    def __init__(self, path = list(), frontier = Stack()):
-        self.path = path # Stores path of Knight object
-        self.frontier = frontier # Stores nodes
-        self.data = list() # Store deep copies of solutions
-        self.n = 0 # N value - length of Board object
-        self.time = 0.0 # Time taken to obtain solutions
-        self.length = 0 # Number of solutions
-
 # Class to locate branches in Knight object's path
 class Node:
     def __init__(self, coordinate, next):
-        self.coordinate = coordinate # Coordinate
-        self.next = next
+        self.coordinate = coordinate # Coordinate where node was created
+        self.next = next # Following coordinate from where node was created
 
 
 def main():
     try:
-        if len(sys.argv) == 3:
-            n = int(sys.argv[1])
-            file_name = sys.argv[2]
-        else:
-            file_name, n = FILE_NAME, N
+        if len(sys.argv) == 4:
+            global VAR, N, FILE_NAME
+            VAR, N, FILE_NAME = str(sys.argv[1]).upper(), int(sys.argv[2]), sys.argv[3]
+            if VAR != "OPEN" and VAR != "CLOSED":
+                raise ValueError
     except:
-        print("Usage: python3 solve.py int filename.txt")
+        print("Usage: python3 solve.py open/closed int filename.txt")
         return 1
 
-    # Create knight and board objects
-    piece = Knight(position=START, board=Board(length=n))
-
-    # Show start state in terminal
-    print(f"\nSearch for solutions in board of size {n}*{n}, with starting position on {START}:\n")
-    piece.board.mark_board(piece.position, piece.counter)
-    piece.board.print_board()
-    print()
-
-    # Solve function
-    solution = search_path(piece)
-    solutions = solution.data
-    solution.n = n
-
-    # If solutions exist, print solutions
+    # Inititalise Knight and Board objects
+    piece = Knight(position=START, board=Board(length=N))
+    # Show start board state in terminal
+    print(f"\nSearch for {VAR.capitalize()} Knights-Tour solutions in board of size {N}*{N}, H_PROB={H_PROB}, with starting position on {START}:\n")
+    piece.board.mark(piece.position, piece.counter)
+    print(f"{piece.board}\n")
+    # Search for solutions
+    solutions = search_path(piece)
     if solutions:
-        write_solution(solution, file_name)
-        print(f"\nSearch completed in {solution.time} seconds.\n{solution.length} solutions found.\nSolutions saved to {file_name}.\n")
+        print(f"\n{solutions} solutions found.\nSolutions saved to {FILE_NAME}.\n")
     else:   
         print(f"\nNo solutions found.\n")
-
-
-def write_solution(solution, file_name):
-    solutions = solution.data
-    n = solution.n
-    count = 0
-    with open(file_name, "w") as file:
-            file.write(f"Solutions for {n}*{n} Knight's Tour Problem, with piece initially at {START}:\n\n")
-            for board in solutions:
-                count += 1
-                file.write(f"Solution {count}:\n")
-                for row in board.map:
-                    file.write(f"{row}\n")
-                file.write("\n")
-            file.write(f"\nSearch completed in {solution.time} seconds.\n{solution.length} solutions found.")
     
 
-def search_path(piece):
-    # Create empty path and frontier
-    solution = Solution()
-    frontier, path = solution.frontier, solution.path
-    # keep track of solutions
-    solutions = solution.data
+def search_path(piece, start=START, h_prob=H_PROB, var=VAR, limit=MAX, file_name=FILE_NAME):
+    # Access path of Knight object, and create Frontier object
+    path = piece.path
+    frontier = Stack()
+    # Keep track if number of solutions found
+    solution_count = 0
     # Time tracking
     start_time = time.time()
-
-    # For starting position, find playable moves
+    # Find playable moves at starting position
     current_position = piece.position
-    available_moves = piece.available_moves()
-
+    available_moves = piece.sorted_moves(h_prob)
     # Create new node for each playable move
     for move in available_moves:
         new_node = Node(current_position, move)
         # Add new node to frontier
         frontier.add(new_node)
-
-    with Bar("Searching...", max=MAX) as bar:
+    with Bar("Searching...", max=limit) as bar:
         # While cycle limit is not exceeded
-        for i in range(MAX):
+        for i in range(limit):
             # If frontier is empty, no solutions exist
             if not frontier.list:
                 break
@@ -119,19 +84,21 @@ def search_path(piece):
             # Update current position
             current_position = piece.position
             # Mark position as played
-            piece.board.mark_board(current_position, piece.counter)
+            piece.board.mark(current_position, piece.counter)
             # Add current position to path
             path.append(current_position)
-
             # Check if board has been fully filled
             if piece.board.check_board():
-                solution_map = deepcopy(piece.board.map)
-                # Keep a copy of solution
-                solutions.append(Board(length=N, map=solution_map))
-                solution.length += 1
-
+                if var == "CLOSED" and piece.closed_tour(piece.position, start):
+                    solution_count += 1
+                    # Write solution into file
+                    write_solution(piece.board.map, solution_count, file_name, h_prob, start)
+                elif var == "OPEN" and not piece.closed_tour(piece.position, start):
+                    solution_count += 1
+                    # Write solution into file
+                    write_solution(piece.board.map, solution_count, file_name, h_prob, start)
             # For new position, find playable moves
-            available_moves = piece.sorted_moves()
+            available_moves = piece.sorted_moves(h_prob)
             # If playable moves exist
             if available_moves:
                 # Create new node for each playable move
@@ -139,32 +106,28 @@ def search_path(piece):
                     new_node = Node(current_position, move)
                     # Add new node to frontier
                     frontier.add(new_node)
-    
             # If no playable moves exist, backtrack
             elif not available_moves and frontier.list:
-                backtrack(piece, solution)
-
+                backtrack(piece, frontier)
             bar.next()
+    print(f"\nSearch completed in {time.time() - start_time} seconds.")
+    return solution_count
 
-    solution.time = time.time() - start_time
-    return solution
 
-
-def backtrack(piece, solution):
-        # Access frontier and path
-        frontier = solution.frontier
-        path = solution.path
+def backtrack(piece, frontier):
+        # Access path of Knight object
+        path = piece.path
         # If unexplored path exists, stop backtracking
         if piece.position == frontier.list[-1].coordinate:
             return True
         # Unmark current position
         current_position = piece.position
-        piece.board.unmark_board(current_position)
+        piece.board.unmark(current_position)
         # Minus from move count
         piece.counter -= 1
         # Remove position from path
         path.pop(-1)
-        # If backtracked to start or frontier is empty, return False
+        # If backtracked to start return False
         if len(path) == 0:
             return False
         # Move piece to previous position
@@ -172,7 +135,18 @@ def backtrack(piece, solution):
         current_position = piece.position
         # If current position has no unexplored paths, recursively backtrack
         if piece.position != frontier.list[-1].coordinate:
-            backtrack(piece, solution)
+            backtrack(piece, frontier)
+
+
+def write_solution(map, solution_count, file_name, h_prob, start):
+    if solution_count == 1:
+        with open(file_name, "w") as file:
+            file.write(f"Solutions for {N}*{N} {VAR.capitalize()} Knights-Tour Problem, H_PROB={h_prob}, with piece initially at {start}:\n\n")
+    with open(file_name, "a") as file: 
+        file.write(f"Solution {solution_count}:\n")
+        for row in map:
+            file.write(f"{row}\n")
+        file.write("\n")
 
 
 if __name__ == "__main__":
