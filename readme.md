@@ -6,9 +6,7 @@ This project aims to find solutions to both open and closed variants of the Knig
 
 ---
 
-# TIMELINE
-This project aims to find solutions to both open and closed variants of the Knight's Tour problem.
-
+# PROJECT TIMELINE
 The project's scope was initially limited to the open variant of the problem. The code was designed around a naive backtracking approach, incorporating the use of a frontier with a stack (LIFO) configuration, to obtain a single solution. However, upon testing, it was found that past N = 7, the code would take too long to run, with iterations in excess of 10000000 required before a single solution could be found. To overcome this obstacle, a version of Warnsdorff’s Rule was used to approach the problem, in addition to backtracking: Always move the knight to an adjacent, unvisited square with minimal degree. Starting from any square, the knight must move to an unvisited square that has the fewest successive moves. With this technique, it was found that only a fraction of the original iterations was required to generate a single solution. This opened up the possibility of searching for multiple solutions to the open problem, hence the project was modified to generate multiple solutions instead. At this point, the program was able to reliably find solutions to the open variant. In a span of 2 minutes, the program was able to find 30000 unique solutions to the variant.
 
 Later, the scope was expanded to include the closed variant of the problem.  During experimentation to search for solutions for the closed variant, it was found that the program would crash prematurely before any solution could be found. To circumvent this, the code was modified to write solutions directly to a text file, instead of storing solutions in memory. The global variable 'H_PROB' was added to the program to allow for configuration of how much Warnsdorff’s Rule is adhered to.
