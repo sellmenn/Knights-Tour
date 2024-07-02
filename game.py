@@ -6,14 +6,14 @@ class Board:
         self.length = length
         self.map = self.create(map)
 
-    # Instance method to return board as a str object
+    # Method to return board as a str object
     def __repr__(self):
         map_str = str()
         for row in self.map:
             map_str += f"{row}\n"
         return map_str
 
-    # Function to return board as list
+    # Method to return board as list
     def create(self, map = list()):
         board = list()
         if not map:
@@ -24,17 +24,17 @@ class Board:
             return board
         return map
 
-    # Function to mark coordinate on board with a marker
+    # Method to mark coordinate on board with a marker
     def mark(self, coordinate, marker):
         x, y = coordinate
         self.map[x][y] = marker
 
-    # Function to unmark position on board
+    # Method to unmark position on board
     def unmark(self, coordinate):
         x, y = coordinate
         self.map[x][y] = 0
 
-    # Function to check if all of board has been marked
+    # Method to check if all of board has been marked
     def complete(self):
         for row in self.map:
             for square in row:
@@ -42,7 +42,7 @@ class Board:
                     return False
         return True
 
-    # Function to check if a coordinate on board has been marked
+    # Method to check if a coordinate on board has been marked
     def check_square(self, coordinate):
         x, y = coordinate
         if self.map[x][y] == 0:
@@ -54,10 +54,10 @@ class Knight():
     def __init__(self, position = (0,0), board = Board()):
         self.position = position
         self.board = board
-        self.counter = 1 # keep track of number of moves played
+        self.counter = 1 # keeps track of number of moves played
         self.path = list()
 
-    # Function to return valid moves
+    # Method to return valid moves
     def available_moves(self, position = None, visited = False):
         if not position:
             x, y = self.position
@@ -82,8 +82,7 @@ class Knight():
                     valid_moves.append(move)
         return valid_moves
     
-    # Function which if given a list of moves, returns a valid move which leads to the position with least available moves
-    # Defaults to object's available moves if no list provided
+    # Method which if given a list of moves, returns a valid move which leads to the position with least available moves
     def informed_move(self, moves = list()):
         min_move = 8
         if not moves and self.available_moves():
@@ -96,16 +95,17 @@ class Knight():
     
     # Function to return sorted list of valid moves in decreasing order of next available moves
     def sorted_moves(self, prob = 0):
+        shuffle_moves = choices([True, False], [1 - prob, prob])[0]
         valid_moves = deepcopy(self.available_moves())
+        if shuffle_moves:
+            shuffle(valid_moves)
+            return valid_moves
         sorted_moves = []
         while valid_moves:
             best_move = self.informed_move(valid_moves)
             sorted_moves.append(best_move)
             valid_moves.remove(best_move)
         sorted_moves.reverse()
-        shuffle_moves = choices([True, False], [1 - prob, prob])[0]
-        if shuffle_moves:
-            shuffle(sorted_moves)
         return sorted_moves
     
     # Function to move knight to new position
@@ -117,4 +117,3 @@ class Knight():
         if coordinate_2 in self.available_moves(position=coordinate_1, visited=True):
             return True
         return False
-

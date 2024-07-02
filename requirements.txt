@@ -2,4 +2,6 @@ progress
 copy
 time
 random
+os
+pyfiglet
 
