@@ -49,7 +49,7 @@ The project includes two files:
 
 ## game.py
 
-### Board Class
+#### Board Class
 This class includes instance methods to simulate a chess board. The Board class contains a 'map' attribute which stores the layout of the board as a list, as well as a 'length' attribute.
 * self.create() takes in an optional 'map' argument of type list, and assigns it to the 'map' attribute. If none is provided, it defaults to creating a 'map' according to its 'length' attribute.
 * self.mark() takes in a 'coordinate' and 'marker' as arguments. It assigns the marker to the coordinate specified in the 'map' attribute.
@@ -57,7 +57,7 @@ This class includes instance methods to simulate a chess board. The Board class 
 * self.complete() returns True if all coordinates in the 'map' attribute have been marked, and False otherwise.
 * self.check_square() returns True if the specified coordinate in the 'map' attribute has been marked, and False otherwise.
 
-### Knight Class
+#### Knight Class
 This class includes instance methods to simulate a knight chess piece. The Knight class contains a 'path' attribute which keeps tracks of coordinates a Knight object has visited, a Board object, a 'counter' attribute which tracks the number of squares it has already traversed on a Board, and a 'position' attribute which represents the Knight object's current coordinate on the Board object.
 Notably, it contains the following instance methods crucial to tackling the problem.
 * self.available_moves() returns a list of legal moves within the confines of the board. It takes in an optional bool argument 'visited' to configure if previously visited coordinates should be excluded or not.
@@ -67,14 +67,14 @@ Notably, it contains the following instance methods crucial to tackling the prob
 
 ## search.py
 
-### Stack Class
+#### Stack Class
 This class inherits from the frontier class. The **Stack** class was created according to the last-in-first-out principle. This principle was chosen as the approach being used is similar to a depth-first-search: in that we are following the best possible path according to Warnsdorff’s Rule, until a dead-end is reached (no more legal moves available).
 self.remove() handles the removing of a node object from the last position in the frontier while returning the removed node object.
 
-### Node Class
+#### Node Class
 This class is relied on to determine 'branches' in the path of the knight piece. 'coordinate' contains the x,y coordinate of a square the knight piece has visited, and 'next' contains the x,y coordinate of the knight piece's subsequent move.
 
-### find_KT()
+#### find_KT()
 This function takes in the following 6 arguments:
 - piece - Knight object (defaults to Knight object on Board object of length 8, with starting position (0, 0))
 - start - start coordinate of Knight object (defaults to (0, 0))
@@ -92,7 +92,7 @@ The function returns the number of tours found for the given configuration, with
 5. If the frontier is empty, then there are no more moves to be played, and the function terminates.
 6. If no more moves can be played from the current position, the **backtrack** function is called.
 
-### backtrack()
+#### backtrack()
 In this project's implementation of backtracking, we rely on 'coordinate' in the Node class to identify branches in the Knight's path, and remove moves from 'path' in the Knight class until the previous branch is located (last coordinate in 'path' matches 'coordinate' for last node in frontier). Essentially, when backtrack is called:
 1. Move knight piece 1 step back
 2. If current coordinate does not match most recent node's 'coordinate' in frontier, no other moves can be made from current coordinate. Go back to step 1.
@@ -100,7 +100,7 @@ Hence, we recursively call backtrack until a differnt path is found.
 
 ## analyse.py
 
-### analyse_KT()
+#### analyse_KT()
 This function serves as the core routine, streamlining the search process and organising results in designated output files. 
 It works by calling find_KT for each coordinate on a Board object, and writing its solutions into separate '.txt' files for each coordinate.
 It also writes the number of solutions found from every coordinate into a '.csv' file.
