@@ -70,6 +70,7 @@ def analyse_KT(length=8, limit=500000, h_prob=1, var="OPEN", csv_file="OpenTour.
 def estimate_runtime(iterations):
     return iterations * 0.00065
 
+
 if __name__ == "__main__":
     main()
 
