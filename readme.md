@@ -76,15 +76,15 @@ This class is relied on to determine 'branches' in the path of the knight piece.
 
 ### find_KT()
 This function takes in the following 6 arguments:
-piece - Knight object (defaults to Knight object on Board object of length 8, with starting position (0, 0))
-start - start coordinate of Knight object (defaults to (0, 0))
-h_prob - probability that Warnsdorff's Rule is conformed to in path finding (defaults to 1)
-var - 'open' or closed' Knight's Tour variant (defaults to 'OPEN')
-limit - maximum number of iterations (defaults to 500000)
-file_name - name of '.txt' file to write solutions to (defaults to "Open_KT.txt")
+- piece - Knight object (defaults to Knight object on Board object of length 8, with starting position (0, 0))
+- start - start coordinate of Knight object (defaults to (0, 0))
+- h_prob - probability that Warnsdorff's Rule is conformed to in path finding (defaults to 1)
+- var - 'open' or closed' Knight's Tour variant (defaults to 'OPEN')
+- limit - maximum number of iterations (defaults to 500000)
+- file_name - name of '.txt' file to write solutions to (defaults to "Open_KT.txt")
 
-Writes solutions found directly to file_name provided.
-Returns the number of tours found for the given configuration, within the limit allowed.
+Solutions are written directly to 'file_name'.
+The function returns the number of tours found for the given configuration, within the limit allowed.
 1. At any position, Node objects are added to the Stack to keep track of branches in the Knight's path.
 2. A Node is then removed from the Stack, containing the next move to be made.
 3. The Knight is moved to the corresponding coordinate.
