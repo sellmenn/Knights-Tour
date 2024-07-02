@@ -29,7 +29,7 @@ def main():
                     raise ValueError
         except:
             print("\nCommand line argument usage: python3 analyse.py open/closed length\n")
-            print(f"Configuration menu:\nDepth of search: {MAX}\nEstimated runtime: {est:.2f} seconds")
+            print(f"Configuration menu:\nDepth of search: {MAX}\nEstimated runtime: {est:.0f} seconds")
             var = input("Search 'open' or 'closed' variants: ").upper()
             length = input("Length of board: ")
         try:
