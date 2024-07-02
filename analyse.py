@@ -19,7 +19,7 @@ def main():
         est = estimate_runtime(MAX)
         try:
             var, length = str(sys.argv[1]).upper(), int(sys.argv[2])
-            print(f"Configuration menu:\nDepth of search: {MAX}\nEstimated runtime: {est:.0f} seconds\nVariant: {var.capitalize()}\nLength of board: {length}")
+            print(f"\nConfiguration menu:\nDepth of search: {MAX}\nEstimated runtime: {est:.0f} seconds\nVariant: {var.capitalize()}\nLength of board: {length}")
             proceed = False
             while proceed != True:
                 confirm = input("Confirm configuration (y/n): ").lower()
