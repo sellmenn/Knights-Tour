@@ -23,11 +23,16 @@ The scope was expanded to include the closed variant of the problem.  During exp
 ##### 3rd Revision: Find multiple solutions to either open or closed variants of the problem, starting from every coordinate of the board.
 It was observed that the number of closed tours that could be found varied tremendously between starting coordinates. Hence, the project was redesigned to search for either open or closed tours starting from all coordinates of the board. To allow for easy comparison, the starting coordinate and associated tours are sorted in individual '.txt' files as well as summarised in a '.csv' file.
 
+--- 
+
 
 # OBTAINED RESULTS
 For a board size of 8*8:
 - Open tours found: 246165 in 318.72 seconds.
 - Closed tours found: 42044 in 329.46 seconds.
+
+---
+
 
 # HOW TO RUN
 1. Ensure all modules in requirements.txt have been installed. Simply use 'pip3 install -r requirements.txt' in your terminal.
@@ -39,6 +44,8 @@ For a board size of 8*8:
 - Solutions are sorted into individual '.txt' files (**Open_01.txt** for solutions stemming from coordinate (0,1)) 
 - Data is summarised in a separate csv file (**Open_KT.csv** or **Closed_KT.csv**). Both are contained in the 'Results' directory.
 - The global variable "MAX" in analyse.py can be varied to adjust the depth of search for each starting coordinate. The default setting of 500000 results in an approximate run-time of 330 seconds.
+
+--- 
 
 
 # PROJECT IMPLEMENTATION
