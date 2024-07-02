@@ -11,14 +11,18 @@ This project aims to find solutions to both open and closed variants of the Knig
 ##### Initial objective: Find a single solution to the open variant of the problem, given a starting coordinate.
 The project's scope was initially limited to the open variant of the problem. The code was designed around a naive backtracking approach, incorporating the use of a frontier with a stack (LIFO) configuration, to obtain a single solution, given a staring coordinate. However, upon testing, it was found that past N = 7, the code would take too long to run, with iterations in excess of 10000000 required before a single solution could be found. To overcome this obstacle, a version of Warnsdorff’s Rule was used to approach the problem, in addition to backtracking: Always move the knight to an adjacent, unvisited square with minimal degree. Starting from any square, the knight must move to an unvisited square that has the fewest successive moves. With this technique, it was found that only a fraction of the original iterations was required to generate a single solution. 
 
+
 ##### 1st Revision: Find multiple solutions to the open variant of the problem, given a starting coordinate.
 The improvements in search time opened up the possibility of searching for multiple solutions to the open problem, hence the project was modified to generate multiple solutions instead. At this point, the program was able to reliably find solutions to the open variant. In a span of 2 minutes, the program was able to find 30000 unique solutions to the variant.
 
-##### 2nd Revision: Find multiple solutions to either open or closed variants of the problem, given a starting coordinate.**
+
+##### 2nd Revision: Find multiple solutions to either open or closed variants of the problem, given a starting coordinate.
 The scope was expanded to include the closed variant of the problem.  During experimentation to search for solutions to the closed variant, it was found that the program would crash prematurely before any solution could be found. To circumvent this, the code was modified to write solutions directly to a text file, instead of storing solutions in memory. The global variable 'H_PROB' was added to the program to allow for configuration of how much Warnsdorff’s Rule is adhered to. 
 
-##### 3rd Revision: Find multiple solutions to either open or closed variants of the problem, starting from every coordinate of the board.**
+
+##### 3rd Revision: Find multiple solutions to either open or closed variants of the problem, starting from every coordinate of the board.
 It was observed that the number of closed tours that could be found varied tremendously between starting coordinates. Hence, the project was redesigned to search for either open or closed tours starting from all coordinates of the board. To allow for easy comparison, the starting coordinate and associated tours are sorted in individual '.txt' files as well as summarised in a '.csv' file.
+
 
 # OBTAINED RESULTS
 For a board size of 8*8:
@@ -26,12 +30,15 @@ For a board size of 8*8:
 - Closed tours found: 42044 in 329.46 seconds.
 
 # HOW TO RUN
-The program will create an empty directory 'Results' if it does not already exist. 
-Solutions are sorted into individual '.txt' files (Open_01.txt for solutions stemming from coordinate (0,1)) and data summarised in a separate csv file (Open_KT.csv or Closed_KT.csv). Both are contained in the 'Results' directory.
-Do note that the global variable "MAX" in analyse.py can be varied to adjust the depth of search for each starting coordinate. The default setting of 500000 results in an approximate run-time of 330 seconds.
 1. Ensure all modules in requirements.txt have been installed. Simply use 'pip3 install -r requirements.txt' in your terminal.
 2. Command line argument usage: python3 analyse.py open/closed length
 3. Alternatively, click run and provide input in terminal.
+
+##### Results
+- The program will create an empty directory 'Results' if it does not already exist. 
+- Solutions are sorted into individual '.txt' files (**Open_01.txt** for solutions stemming from coordinate (0,1)) 
+- Data is summarised in a separate csv file (**Open_KT.csv** or **Closed_KT.csv**). Both are contained in the 'Results' directory.
+- The global variable "MAX" in analyse.py can be varied to adjust the depth of search for each starting coordinate. The default setting of 500000 results in an approximate run-time of 330 seconds.
 
 
 # PROJECT IMPLEMENTATION
