@@ -27,9 +27,9 @@ It was observed that the number of closed tours that could be found varied treme
 
 
 # OBTAINED RESULTS
-For a board size of 8*8:
-- Open tours found: 246165 in 318.72 seconds.
-- Closed tours found: 42044 in 329.46 seconds.
+For a board size of 8*8, search limit of 800000
+- Open tours found: 351986 in 509.80 seconds.
+- Closed tours found: 60164 in 532.16 seconds.
 
 ---
 
@@ -37,13 +37,16 @@ For a board size of 8*8:
 # HOW TO RUN
 1. Ensure all modules in requirements.txt have been installed. Simply use 'pip3 install -r requirements.txt' in your terminal.
 2. Command line argument usage: python3 analyse.py open/closed length
-3. Alternatively, click run and provide input in terminal.
+3. Alternatively, enter 'python3 analyse.py' and follow terminal prompts.
 
 ##### Results
 - The program will create an empty directory 'Results' if it does not already exist. 
 - Solutions are sorted into individual '.txt' files (**Open_01.txt** for solutions stemming from coordinate (0,1)) 
 - Data is summarised in a separate csv file (**Open_KT.csv** or **Closed_KT.csv**). Both are contained in the 'Results' directory.
-- The global variable "MAX" in analyse.py can be varied to adjust the depth of search for each starting coordinate. The default setting of 500000 results in an approximate run-time of 330 seconds.
+
+##### Further Configuration
+- The global variable 'MAX' in analyse.py can be varied to adjust the depth of search for each starting coordinate. The default setting of 500000 results in an approximate run-time of 330 seconds.
+- The global variable 'H_PROB' in analyse.py can be varied between 0 and 1 to adjust the conformity to Warnsdorff’s Rule.
 
 --- 
 
