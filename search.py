@@ -78,7 +78,7 @@ def find_KT(length=8, start=(0,0), h_prob=1, var="OPEN", limit=500000, file_name
                 elif var == "OPEN" and not piece.closed_tour(piece.position, start):
                     solution_count += 1
                     # Write solution into file
-                    write_solution(piece, solution_count, file_name, h_prob, start, var)
+                    write_solution(piece, solution_count, file_name, h_prob, start, var, limit)
             # For new position, find playable moves
             available_moves = piece.sorted_moves(h_prob)
             # If playable moves exist
@@ -119,11 +119,11 @@ def backtrack(piece, frontier):
             backtrack(piece, frontier)
 
 
-def write_solution(piece, solution_count, file_name, h_prob, start, var):
+def write_solution(piece, solution_count, file_name, h_prob, start, var, limit):
     map = piece.board.map
     if solution_count == 1:
         with open(file_name, "w") as file:
-            file.write(f"{piece.board.length}*{piece.board.length} {var.capitalize()} Knight's Tour Problem, H_PROB={h_prob}, start at {start}:\n\n")
+            file.write(f"{var.capitalize()} Knight's Tour Problem\nLength of board: {piece.board.length}\nH_PROB: {h_prob}\nStarting coordinate: {start}\nSearch depth: {limit}\n\n")
     with open(file_name, "a") as file: 
         file.write(f"Solution {solution_count}:\n")
         for row in map:
