@@ -42,10 +42,10 @@ def find_KT(length=8, start=(0,0), h_prob=1, var="OPEN", limit=500000, file_name
     solution_count = 0
     # Time tracking
     start_time = time.time()
-    # Find playable moves at starting position
     current_position = piece.position
     # Mark starting position
     piece.board.mark(current_position, piece.counter)
+    # Find playable moves at starting position
     available_moves = piece.sorted_moves(h_prob)
     # Create new node for each playable move
     for move in available_moves:
