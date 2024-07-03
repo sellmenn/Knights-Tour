@@ -9,7 +9,7 @@ This project aims to find solutions to both open and closed variants of the Knig
 # PROJECT TIMELINE
 
 ##### Initial objective: Find a single solution to the open variant of the problem, given a starting coordinate.
-The project's scope was initially limited to the open variant of the problem. The code was designed around a naive backtracking approach, incorporating the use of a frontier with a stack (LIFO) configuration, to obtain a single solution, given a staring coordinate. However, upon testing, it was found that past N = 7, the code would take too long to run, with iterations in excess of 10000000 required before a single solution could be found. To overcome this obstacle, a version of Warnsdorff’s Rule was used to approach the problem, in addition to backtracking: Always move the knight to an adjacent, unvisited square with minimal degree. Starting from any square, the knight must move to an unvisited square that has the fewest successive moves. With this technique, it was found that only a fraction of the original iterations was required to generate a single solution. 
+The project's scope was initially limited to the open variant of the problem. The code was designed around a naive backtracking approach, incorporating the use of a frontier with a stack (LIFO) configuration, to obtain a single solution, given a starting coordinate. However, upon testing, it was found that past N = 7, the code would take too long to run, with iterations in excess of 10000000 required before a single solution could be found. To overcome this obstacle, a version of Warnsdorff’s Rule was used to approach the problem, in addition to backtracking: Always move the knight to an adjacent, unvisited square with minimal degree. Starting from any square, the knight must move to an unvisited square that has the fewest successive moves. With this technique, it was found that only a fraction of the original iterations was required to generate a single solution. 
 
 
 ##### 1st Revision: Find multiple solutions to the open variant of the problem, given a starting coordinate.
@@ -52,10 +52,10 @@ For board of size 8*8 and search depth of 800000:
 
 
 # PROJECT IMPLEMENTATION
-The project includes two files: 
+The project includes three files: 
 1. game.py - contains the **Board** and **Knight** class.
 2. search.py - contains the **Stack** and **Node** class, **find_KT()** and **backtrack()** functions.
-3. analyse.py - contains the  **analyse_KT** function.
+3. analyse.py - contains the  **analyse_KT()** function.
 
 ## game.py
 
@@ -86,14 +86,14 @@ This class is relied on to determine 'branches' in the path of the knight piece.
 
 #### find_KT()
 This function takes in the following 6 arguments:
-- piece - Knight object (defaults to Knight object on Board object of length 8, with starting position (0, 0))
+- length - length of Board object (defaults to 8)
 - start - start coordinate of Knight object (defaults to (0, 0))
 - h_prob - probability that Warnsdorff's Rule is conformed to in path finding (defaults to 1)
 - var - 'open' or closed' Knight's Tour variant (defaults to 'OPEN')
 - limit - maximum number of iterations (defaults to 500000)
 - file_name - name of '.txt' file to write solutions to (defaults to "Open_KT.txt")
 
-Solutions are written directly to 'file_name'.
+Solutions to knight's tours are written directly to 'file_name'.
 The function returns the number of tours found for the given configuration, within the limit allowed.
 1. At any position, Node objects are added to the Stack to keep track of branches in the Knight's path.
 2. A Node is then removed from the Stack, containing the next move to be made.

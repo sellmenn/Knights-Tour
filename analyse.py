@@ -56,7 +56,7 @@ def analyse_KT(length=8, limit=500000, h_prob=1, var="OPEN", csv_file="OpenTour.
         for j in range(length):
             print(f"\nStarting coordinate ({i}, {j}):")
             # Obtain number of solutions while writing them into txt files
-            solution_count = find_KT(piece=Knight(position=(i,j), board=Board(length=length)), start=(i, j), h_prob=h_prob, var=var, limit=limit, file_name=f"Results/{var.capitalize()}_{i}{j}.txt")
+            solution_count = find_KT(length=length, start=(i, j), h_prob=h_prob, var=var, limit=limit, file_name=f"Results/{var.capitalize()}_{i}{j}.txt")
             # Add to solution count
             total_count += solution_count
             print(f"{solution_count} tours found ({total_count}). Refer to Results/{var.capitalize()}_{i}{j}.txt.")

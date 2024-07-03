@@ -19,19 +19,22 @@ class Node:
         self.coordinate = coordinate # Coordinate where node was created
         self.next = next # Following coordinate from where node was created
 
+
 """
-Function which takes in 6 arguments:
-piece - Knight object (defaults to Knight object on Board object of length 8, with starting position (0, 0))
-start - start coordinate of Knight object (defaults to (0, 0))
+Function which takes in the folllowing arguments:
+length - length of Board object (defaults to 8)
+start - starting coordinate of Knight object (defaults to (0, 0))
 h_prob - probability that Warnsdorff's Rule is conformed to in path finding (defaults to 1)
 var - 'open' or closed' Knight's Tour variant (defaults to 'OPEN')
 limit - maximum number of iterations (defaults to 500000)
 file_name - name of '.txt' file to write solutions to (defaults to "Open_KT.txt")
 
-Writes solutions found directly to file_name provided.
+Writes solutions for tours found directly to file_name provided.
 Returns the number of tours found for the given configuration, within the limit allowed.
 """
-def find_KT(piece=Knight((0,0), Board(length=8)), start=(0,0), h_prob=1, var="OPEN", limit=500000, file_name="Open_KT.txt"):
+def find_KT(length=8, start=(0,0), h_prob=1, var="OPEN", limit=500000, file_name="Open_KT.txt"):
+    # Create Knight object
+    piece = Knight(position=start, board=Board(length=length))
     # Access path of Knight object, and create Frontier object
     path = piece.path
     frontier = Stack()
