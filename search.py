@@ -74,7 +74,7 @@ def find_KT(length=8, start=(0,0), h_prob=1, var="OPEN", limit=500000, file_name
                 if var == "CLOSED" and piece.closed_tour(piece.position, start):
                     solution_count += 1
                     # Write solution into file
-                    write_solution(piece, solution_count, file_name, h_prob, start, var)
+                    write_solution(piece, solution_count, file_name, h_prob, start, var, limit)
                 elif var == "OPEN" and not piece.closed_tour(piece.position, start):
                     solution_count += 1
                     # Write solution into file

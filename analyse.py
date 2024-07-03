@@ -32,10 +32,8 @@ def main():
             print(f"Configuration menu:\nDepth of search: {MAX}\nEstimated runtime: {est:.0f} seconds")
             var = input("Search 'open' or 'closed' variants: ").upper()
             length = input("Length of board: ")
-        try:
-            analyse_KT(length=int(length), limit=MAX, h_prob=H_PROB, var=var.upper(), csv_file=f"{var.capitalize()}_KT.csv")
-        except:
-            print("\nInvalid input.\nCommand line argument usage: python3 analyse.py open/closed length\n")
+
+        analyse_KT(length=int(length), limit=MAX, h_prob=H_PROB, var=var.upper(), csv_file=f"{var.capitalize()}_KT.csv")
     except EOFError:
         print("\nProgram terminated!\n")
 
