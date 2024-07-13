@@ -28,8 +28,11 @@ It was observed that the number of closed tours that could be found varied treme
 
 # OBTAINED RESULTS
 For board of size 8*8 and search depth of 800000:
-- Open tours found: 351986 in 509.80 seconds.
-- Closed tours found: 60164 in 532.16 seconds.
+
+| Variant | Tours found | Time / sec |
+| ------- | ----------- | ---------- |
+| Open    | 351986      |   509.80   |
+| Closed  | 60164       |   532.16   |
 
 ---
 
