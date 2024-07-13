@@ -52,23 +52,28 @@ For board of length 8 and search depth of 800000:
 >
 >> The global variable `H_PROB` in analyse.py can be varied between 0 and 1 to adjust the conformity to Warnsdorff’s Rule.
 
-## PROJECT IMPLEMENTATION
+## Implementation
 The project includes three files: 
-1. util.py - contains the `Board and Knight class.
-2. search.py - contains the Stack and Node class, find_KT() and backtrack() functions.
-3. analyse.py - contains the  analyse_KT() function.
+1. util.py - contains the `Board` and `Knight` class.
+2. search.py - contains the `Stack` and `Node` class, `find_KT()` and `backtrack()` functions.
+3. analyse.py - contains the  `analyse_KT()` function.
 
-## util.py
+### util.py
 
-#### Board Class
-This class includes instance methods to simulate a chess board. The Board class contains a 'map' attribute which stores the layout of the board as a list, as well as a 'length' attribute.
-* self.create() takes in an optional 'map' argument of type list, and assigns it to the 'map' attribute. If none is provided, it defaults to creating a 'map' according to its 'length' attribute.
-* self.mark() takes in a 'coordinate' and 'marker' as arguments. It assigns the marker to the coordinate specified in the 'map' attribute.
-* self.unmark() takes in a 'coordinate' as an argument, and resets the coordinate specified in the 'map' attribute to 0.
-* self.complete() returns True if all coordinates in the 'map' attribute have been marked, and False otherwise.
-* self.check_square() returns True if the specified coordinate in the 'map' attribute has been marked, and False otherwise.
+#### `Board` Class
+This class includes instance methods to simulate a chess board. The Board class contains a `map` attribute which stores the layout of the board as an array, as well as a `length` attribute.
+> Instance Methods
+>> **`create()`** takes in an optional 'map' parameter of type list, and assigns it to the `map` attribute. If none is provided, it defaults to creating a 'map' according to its `length` attribute.
+>
+>> **`mark()`** takes in a 'coordinate' and 'marker' as parameters. It assigns the 'marker' to the coordinate specified in the `map` attribute.
+>
+>> **`unmark()`** takes in a single parameter 'coordinate', and resets the coordinate specified in the `map` attribute to '0'.
+>
+>> **`complete()`** returns 'True' if all coordinates in the `map` attribute have been marked, and 'False' otherwise.
+>
+>> **`check_square()`** returns 'True' if the specified coordinate in the `map` attribute has been marked, and 'False' otherwise.
 
-#### Knight Class
+#### `Knight` Class
 This class includes instance methods to simulate a knight chess piece. The Knight class contains a 'path' attribute which keeps tracks of coordinates a Knight object has visited, a Board object, a 'counter' attribute which tracks the number of squares it has already traversed on a Board, and a 'position' attribute which represents the Knight object's current coordinate on the Board object.
 Notably, it contains the following instance methods crucial to tackling the problem.
 * self.available_moves() returns a list of legal moves within the confines of the board. It takes in an optional bool argument 'visited' to configure if previously visited coordinates should be excluded or not.
