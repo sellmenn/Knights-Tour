@@ -37,6 +37,13 @@ For board of length 8 and search depth of 800000:
 | Open    | 351 986     |   509.80   |
 | Closed  | 60 164      |   532.16   |
 
+For board of length 5 and search depth of 1000000:
+| Variant | Tours found | Time / sec |
+| ------- | ----------- | ---------- |
+| Open    | 1 616       |   265.94   |
+
+> There are 1728 possible tours for a board of length 5!
+
 ## Usage
 1. Use `pip3 install -r requirements.txt` in your terminal to ensure all required modules have been installed.
 2. Command line argument usage: `python3 analyse.py open/closed length` or `python3 analyse.py`.
