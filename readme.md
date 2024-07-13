@@ -42,7 +42,7 @@ For board of length 5 and search depth of 1000000:
 | ------- | ----------- | ---------- |
 | Open    | 1 616       |   265.94   |
 
-> There are 1728 possible tours for a board of length 5!
+> There are 1728 possible open tours (and 0 closed) for a board of length 5!
 
 ## Usage
 1. Use `pip3 install -r requirements.txt` in your terminal to ensure all required modules have been installed.
