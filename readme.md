@@ -58,9 +58,11 @@ The project includes three files:
 2. search.py - contains the `Stack` and `Node` class, `find_KT()` and `backtrack()` functions.
 3. analyse.py - contains the  `analyse_KT()` function.
 
+--- 
+
 ### util.py
 
-##### `Board` Class
+#### Board Class
 This class includes instance methods to simulate a chess board. The Board class contains a `map` attribute which stores the layout of the board as an array, as well as a `length` attribute.
 > Instance Methods:
 > - **`create()`** takes in an optional 'map' parameter of type list, and assigns it to the `map` attribute. If none is provided, it defaults to creating a 'map' according to its `length` attribute.
@@ -73,7 +75,7 @@ This class includes instance methods to simulate a chess board. The Board class 
 >
 > - **`check_square()`** returns 'True' if the specified coordinate in the `map` attribute has been marked, and 'False' otherwise.
 
-##### `Knight` Class
+#### Knight Class
 This class includes instance methods to simulate a knight chess piece. It contains a `path` attribute which stores visited coordinates, a `Board` object, a `counter` attribute which tracks the number of squares traversed on the board, and a `position` attribute which represents the current coordinate.
 > Instance Methods:
 > - **`available_moves()`** returns a list of legal moves. It takes in an optional bool parameter 'visited' to configure if previously visited coordinates should be excluded or not.
@@ -84,19 +86,21 @@ This class includes instance methods to simulate a knight chess piece. It contai
 >
 > - **`closed_tour()`** takes in 2 coordinates as parameters, and returns 'True' if they are one move apart from each other.
 
+--- 
+
 ### search.py
 
-##### `Stack` Class
+#### Stack Class
 The Stack class was created according to the last-in-first-out principle. This principle was chosen as the approach being used is similar to a depth-first-search: in that the `Knight` object is traversing the best possible path according to Warnsdorff’s Rule, until a dead-end is reached.
 > Instance Methods:
 > - **`remove()`** removes a `Node` object from the last position in the frontier while returning the removed node object.
 >
 > - **`empty()`** returns 'True' if the frontier is empty, and 'False' otherwise.
 
-##### `Node` Class
+#### Node Class
 This class is relied on to determine 'branches' in the path of the knight piece. The `coordinate` attribute contains the x,y coordinate of a square the knight piece has visited, and the `next` attribute contains the x,y coordinate of the Knight piece's subsequent possible move.
 
-##### `find_KT()`
+#### find_KT()
 This function takes in the following 6 parameters:
 - length - length of Board object (defaults to 8)
 - start - start coordinate of `Knight` object (defaults to (0, 0))
@@ -121,7 +125,7 @@ The function returns the number of tours found for the given configuration, with
 >
 > 6. If no more moves can be played from the current position, the `backtrack()` function is called.
 
-##### `backtrack()`
+#### backtrack()
 In this project's implementation of backtracking, we rely on the `coordinate` attribute in the `Node` class to identify branches in the Knight's path, and remove coordinates from `path` in the Knight class until the most recent coordinate in `path` matches `coordinate` for the last node in the frontier. Essentially, when backtrack is called:
 
 > How it works:
@@ -133,8 +137,10 @@ In this project's implementation of backtracking, we rely on the `coordinate` at
 >
 > 4. If the length of `path` is 0, the Knight object has exhausted all available branches and can no longer 'backtrack'. The function returns 'False'.
 
+--- 
+
 ### analyse.py
 
-##### `analyse_KT()`
+#### analyse_KT()
 This function serves as the core routine, streamlining the search process and organising results in designated output files. 
 It works by calling `find_KT()` for each coordinate on a `Board` object, and writing its solutions into separate '.txt' files. It also details the number of solutions found for every coordinate in a '.csv' file. Progress can be monitored through terminal outputs for each starting coordinate. 
