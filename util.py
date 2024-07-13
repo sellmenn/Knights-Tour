@@ -93,7 +93,7 @@ class Knight():
                 best = move
         return best
     
-    # Function to return sorted list of valid moves in decreasing order of next available moves
+    # Method to return sorted list of valid moves in decreasing order of next available moves
     def sorted_moves(self, prob = 0):
         shuffle_moves = choices([True, False], [1 - prob, prob])[0]
         valid_moves = deepcopy(self.available_moves())
@@ -108,11 +108,11 @@ class Knight():
         sorted_moves.reverse()
         return sorted_moves
     
-    # Function to move knight to new position
+    # Method to move knight to new position
     def move(self, new_position):
         self.position = new_position
 
-    # Function to check if current position on the board is one move away from another position
+    # Method to check if current position on the board is one move away from another position
     def closed_tour(self, coordinate_1, coordinate_2):
         if coordinate_2 in self.available_moves(position=coordinate_1, visited=True):
             return True
