@@ -137,6 +137,4 @@ In this project's implementation of backtracking, we rely on the `coordinate` at
 
 ##### `analyse_KT()`
 This function serves as the core routine, streamlining the search process and organising results in designated output files. 
-It works by calling find_KT for each coordinate on a Board object, and writing its solutions into separate `.txt` files for each coordinate.
-It also writes the number of solutions found from every coordinate into a `.csv` file.
-Progress can be monitored through terminal outputs for each starting coordinate. 
+It works by calling `find_KT()` for each coordinate on a `Board` object, and writing its solutions into separate '.txt' files. It also details the number of solutions found for every coordinate in a '.csv' file. Progress can be monitored through terminal outputs for each starting coordinate. 
