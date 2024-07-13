@@ -12,21 +12,24 @@ The code was designed around a naive backtracking approach, incorporating the us
 Upon testing, it was found that past a board size of 7, the code would take too long to run, with iterations in excess of 10000000 required before a single solution could be found. 
 To overcome this, a version of Warnsdorff’s Rule was used in addition to backtracking: From any square, the knight must move to an unvisited square that has the fewest successive moves. With this technique, it was found that only a fraction of the original iterations was required to generate a single solution. 
 
-
 ##### 1st Revision: Find multiple solutions to the open variant of the problem, given a starting coordinate.
 
 The improvements in search times opened up the possibility of searching for multiple solutions to the open problem, hence the project was modified to generate multiple solutions instead. In a span of 2 minutes, the program was able to find 30000 unique solutions to the variant.
-
 
 ##### 2nd Revision: Find multiple solutions to either open or closed variants of the problem, given a starting coordinate.
 
 The scope was expanded to include the closed variant of the problem.  During experimentation, it was found that the program would crash prematurely before any solution could be found. To avoid this, the code was modified to write solutions directly to a text file, instead of storing solutions in memory.
 
-
 ##### 3rd Revision: Find multiple solutions to either open or closed variants of the problem, starting from every coordinate of the board.
 
 It was observed that the number of closed tours that could be found varied between starting coordinates. Hence, the project was redesigned to search for either open or closed tours starting from anywhere on the board. 
 To allow for easy comparison, the starting coordinate and associated tours are sorted into individual '.txt' files as well as summarised in a '.csv' file.
+
+##### Future Revisions:
+- Visual display of number of solutions found for each coordinate on a grid
+- Improve organisation of output files
+- Graph number of solutions found over time
+- ???
 
 ## Obtained Results
 
