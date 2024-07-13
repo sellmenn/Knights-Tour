@@ -2,16 +2,20 @@ import time
 from progress.bar import Bar
 from game import *
 
-class Frontier:
+class Stack:
     def __init__(self):
         self.list = []
 
     def add(self, node):
         self.list.append(node)
 
-class Stack(Frontier):
     def remove(self):
         return self.list.pop(-1)
+    
+    def empty(self):
+        if not self.list:
+            return True
+        return False
 
 # Class to locate branches in Knight object's path
 class Node:
@@ -55,7 +59,7 @@ def find_KT(length=8, start=(0,0), h_prob=1, var="OPEN", limit=500000, file_name
         # While cycle limit is not exceeded
         for i in range(limit):
             # If frontier is empty, no solutions exist
-            if not frontier.list:
+            if frontier.empty():
                 break
             # Pick a node from frontier
             node = frontier.remove()

@@ -21,7 +21,7 @@ The scope was expanded to include the closed variant of the problem.  During exp
 
 
 ##### 3rd Revision: Find multiple solutions to either open or closed variants of the problem, starting from every coordinate of the board.
-It was observed that the number of closed tours that could be found varied tremendously between starting coordinates. Hence, the project was redesigned to search for either open or closed tours starting from all coordinates of the board. To allow for easy comparison, the starting coordinate and associated tours are sorted in individual `.txt` files as well as summarised in a `.csv` file.
+It was observed that the number of closed tours that could be found varied tremendously between starting coordinates. Hence, the project was redesigned to search for either open or closed tours starting from all coordinates of the board. To allow for easy comparison, the starting coordinate and associated tours are sorted in individual '.txt' files as well as summarised in a '.csv' file.
 
 --- 
 
@@ -40,12 +40,12 @@ For board of size 8*8 and search depth of 800000:
 3. Alternatively, enter `python3 analyse.py` and follow terminal prompts.
 
 ##### Results
-- The program will create an empty directory `Results` if it does not already exist. 
-- Solutions are sorted into individual `.tx`' files (`Open_01.txt` for solutions stemming from coordinate (0,1)) 
-- Data is summarised in a separate csv file (`Open_KT.csv` or `Closed_KT.csv`). Both are contained in the `Results` directory.
+- The program will create an empty directory Results if it does not already exist. 
+- Solutions are sorted into individual '.txt' files (Open_01.txt for solutions stemming from coordinate (0,1)) 
+- Data is summarised in a separate csv file (Open_KT.csv or Closed_KT.csv). Both are contained in the Results directory.
 
 ##### Further Configuration
-- The global variable `MAX` in analyse.py can be varied to adjust the depth of search for each starting coordinate. The default setting of `500000` results in an approximate run-time of 330 seconds.
+- The global variable `MAX` in analyse.py can be varied to adjust the depth of search for each starting coordinate. The default setting of 500000 results in an approximate run-time of 330 seconds.
 - The global variable `H_PROB` in analyse.py can be varied between 0 and 1 to adjust the conformity to Warnsdorff’s Rule.
 
 --- 
@@ -53,9 +53,9 @@ For board of size 8*8 and search depth of 800000:
 
 # PROJECT IMPLEMENTATION
 The project includes three files: 
-1. game.py - contains the `Board` and `Knight` class.
-2. search.py - contains the `Stack` and `Node` class, `find_KT()` and `backtrack()` functions.
-3. analyse.py - contains the  `analyse_KT()` function.
+1. game.py - contains the `Board and Knight class.
+2. search.py - contains the Stack and Node class, find_KT() and backtrack() functions.
+3. analyse.py - contains the  analyse_KT() function.
 
 ## game.py
 
@@ -78,7 +78,7 @@ Notably, it contains the following instance methods crucial to tackling the prob
 ## search.py
 
 #### Stack Class
-This class inherits from the frontier class. The `Stack` class was created according to the last-in-first-out principle. This principle was chosen as the approach being used is similar to a depth-first-search: in that we are following the best possible path according to Warnsdorff’s Rule, until a dead-end is reached (no more legal moves available).
+The Stack class was created according to the last-in-first-out principle. This principle was chosen as the approach being used is similar to a depth-first-search: in that we are following the best possible path according to Warnsdorff’s Rule, until a dead-end is reached (no more legal moves available).
 self.remove() handles the removing of a node object from the last position in the frontier while returning the removed node object.
 
 #### Node Class
