@@ -1,32 +1,35 @@
-# THE KNIGHT'S TOUR
-
-This project aims to find solutions to both open and closed Knight's Tours variants.
+## The Knight's Tour
 
 "A knight's tour is a sequence of moves of a knight on a chessboard such that the knight visits every square exactly once. If the knight ends on a square that is one knight's move from the beginning square (so that it could tour the board again immediately, following the same path), the tour is closed (or re-entrant); otherwise, it is open." - Wikipedia
 
---- 
+This project aims to find solutions to both open and closed Knight's Tours variants.
 
-# PROJECT TIMELINE
+## Timeline
 
-> Initial objective: Find a single solution to the open variant of the problem, given a starting coordinate.
->> The project's scope was initially limited to the open variant of the problem. The code was designed around a naive backtracking approach, incorporating the use of a frontier with a stack configuration, to obtain a single solution, given a starting coordinate. However, upon testing, it was found that past a board size of 7, the code would take too long to run, with iterations in excess of 10000000 required before a single solution could be found. To overcome this obstacle, a version of Warnsdorff’s Rule was used to approach the problem, in addition to backtracking: Always move the knight to an adjacent, unvisited square with minimal degree. Starting from any square, the knight must move to an unvisited square that has the fewest successive moves. With this technique, it was found that only a fraction of the original iterations was required to generate a single solution. 
+##### Initial objective: Find a single solution to the open variant of the problem, given a starting coordinate.
+
+The code was designed around a naive backtracking approach, incorporating the use of a frontier with a stack configuration, to obtain a single solution, given a starting coordinate. 
+Upon testing, it was found that past a board size of 7, the code would take too long to run, with iterations in excess of 10000000 required before a single solution could be found. 
+To overcome this, a version of Warnsdorff’s Rule was used in addition to backtracking: From any square, the knight must move to an unvisited square that has the fewest successive moves. With this technique, it was found that only a fraction of the original iterations was required to generate a single solution. 
 
 
 ##### 1st Revision: Find multiple solutions to the open variant of the problem, given a starting coordinate.
-The improvements in search time opened up the possibility of searching for multiple solutions to the open problem, hence the project was modified to generate multiple solutions instead. At this point, the program was able to reliably find solutions to the open variant. In a span of 2 minutes, the program was able to find 30000 unique solutions to the variant.
+
+The improvements in search times opened up the possibility of searching for multiple solutions to the open problem, hence the project was modified to generate multiple solutions instead. In a span of 2 minutes, the program was able to find 30000 unique solutions to the variant.
 
 
 ##### 2nd Revision: Find multiple solutions to either open or closed variants of the problem, given a starting coordinate.
-The scope was expanded to include the closed variant of the problem.  During experimentation to search for solutions to the closed variant, it was found that the program would crash prematurely before any solution could be found. To circumvent this, the code was modified to write solutions directly to a text file, instead of storing solutions in memory. The global variable `H_PROB` was added to the program to allow for configuration of how much Warnsdorff’s Rule is adhered to. 
+
+The scope was expanded to include the closed variant of the problem.  During experimentation, it was found that the program would crash prematurely before any solution could be found. To avoid this, the code was modified to write solutions directly to a text file, instead of storing solutions in memory.
 
 
 ##### 3rd Revision: Find multiple solutions to either open or closed variants of the problem, starting from every coordinate of the board.
-It was observed that the number of closed tours that could be found varied tremendously between starting coordinates. Hence, the project was redesigned to search for either open or closed tours starting from all coordinates of the board. To allow for easy comparison, the starting coordinate and associated tours are sorted in individual '.txt' files as well as summarised in a '.csv' file.
 
---- 
+It was observed that the number of closed tours that could be found varied between starting coordinates. Hence, the project was redesigned to search for either open or closed tours starting from anywhere on the board. 
+To allow for easy comparison, the starting coordinate and associated tours are sorted into individual '.txt' files as well as summarised in a '.csv' file.
 
+## Obtained Results
 
-# OBTAINED RESULTS
 For board of length 8 and search depth of 800000:
 
 | Variant | Tours found | Time / sec |
@@ -34,27 +37,20 @@ For board of length 8 and search depth of 800000:
 | Open    | 351 986     |   509.80   |
 | Closed  | 60 164      |   532.16   |
 
----
+## Usage
+1. Use `pip3 install -r requirements.txt` in your terminal to ensure required modules have been installed.
+2. Command line argument usage: `python3 analyse.py open/closed length` or `python3 analyse.py`.
 
+> Accessing Results:
+>> The program will create an empty directory 'Results' if it does not already exist, where solutions are sorted into individual '.txt' files.
+>>> e.g. Open_01.txt for solutions stemming from coordinate (0,1)
+>> Data is summarised in a separate csv file 'Open_KT.csv' or 'Closed_KT.csv'.
 
-# HOW TO RUN
-1. Ensure all modules in requirements.txt have been installed. Simply use `pip3 install -r requirements.txt` in your terminal.
-2. Command line argument usage: `python3 analyse.py open/closed length`
-3. Alternatively, enter `python3 analyse.py` and follow terminal prompts.
+> Further Configuration:
+>> The global variable `MAX` in analyse.py can be varied to adjust the depth of search for each starting coordinate. The default setting of 500000 results in an approximate run-time of 330 seconds.
+>> The global variable `H_PROB` in analyse.py can be varied between 0 and 1 to adjust the conformity to Warnsdorff’s Rule.
 
-##### Results
-- The program will create an empty directory Results if it does not already exist. 
-- Solutions are sorted into individual '.txt' files (Open_01.txt for solutions stemming from coordinate (0,1)) 
-- Data is summarised in a separate csv file (Open_KT.csv or Closed_KT.csv). Both are contained in the Results directory.
-
-##### Further Configuration
-- The global variable `MAX` in analyse.py can be varied to adjust the depth of search for each starting coordinate. The default setting of 500000 results in an approximate run-time of 330 seconds.
-- The global variable `H_PROB` in analyse.py can be varied between 0 and 1 to adjust the conformity to Warnsdorff’s Rule.
-
---- 
-
-
-# PROJECT IMPLEMENTATION
+## PROJECT IMPLEMENTATION
 The project includes three files: 
 1. util.py - contains the `Board and Knight class.
 2. search.py - contains the Stack and Node class, find_KT() and backtrack() functions.
