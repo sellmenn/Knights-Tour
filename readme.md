@@ -53,11 +53,11 @@ For board of size 8*8 and search depth of 800000:
 
 # PROJECT IMPLEMENTATION
 The project includes three files: 
-1. game.py - contains the `Board and Knight class.
+1. util.py - contains the `Board and Knight class.
 2. search.py - contains the Stack and Node class, find_KT() and backtrack() functions.
 3. analyse.py - contains the  analyse_KT() function.
 
-## game.py
+## util.py
 
 #### Board Class
 This class includes instance methods to simulate a chess board. The Board class contains a 'map' attribute which stores the layout of the board as a list, as well as a 'length' attribute.

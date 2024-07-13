@@ -1,5 +1,5 @@
 from search import find_KT
-from game import *
+from util import *
 from time import time, sleep
 import sys
 import os

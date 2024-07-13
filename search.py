@@ -1,6 +1,5 @@
-import time
 from progress.bar import Bar
-from game import *
+from util import *
 
 class Stack:
     def __init__(self):
@@ -42,10 +41,8 @@ def find_KT(length=8, start=(0,0), h_prob=1, var="OPEN", limit=500000, file_name
     # Access path of Knight object, and create Frontier object
     path = piece.path
     frontier = Stack()
-    # Keep track if number of solutions found
+    # Keep track of number of solutions found
     solution_count = 0
-    # Time tracking
-    start_time = time.time()
     current_position = piece.position
     # Mark starting position
     piece.board.mark(current_position, piece.counter)
@@ -95,7 +92,6 @@ def find_KT(length=8, start=(0,0), h_prob=1, var="OPEN", limit=500000, file_name
             elif not available_moves and frontier.list:
                 backtrack(piece, frontier)
             bar.next()
-    print(f"Search completed in {(time.time() - start_time):.4f} seconds.")
     return solution_count
 
 
