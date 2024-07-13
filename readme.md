@@ -60,7 +60,7 @@ The project includes three files:
 
 ### util.py
 
-#### `Board` Class
+##### `Board` Class
 This class includes instance methods to simulate a chess board. The Board class contains a `map` attribute which stores the layout of the board as an array, as well as a `length` attribute.
 > Instance Methods:
 > - **`create()`** takes in an optional 'map' parameter of type list, and assigns it to the `map` attribute. If none is provided, it defaults to creating a 'map' according to its `length` attribute.
@@ -73,50 +73,69 @@ This class includes instance methods to simulate a chess board. The Board class 
 >
 > - **`check_square()`** returns 'True' if the specified coordinate in the `map` attribute has been marked, and 'False' otherwise.
 
-#### `Knight` Class
-This class includes instance methods to simulate a knight chess piece. The Knight class contains a 'path' attribute which keeps tracks of coordinates a Knight object has visited, a Board object, a 'counter' attribute which tracks the number of squares it has already traversed on a Board, and a 'position' attribute which represents the Knight object's current coordinate on the Board object.
-Notably, it contains the following instance methods crucial to tackling the problem.
-* self.available_moves() returns a list of legal moves within the confines of the board. It takes in an optional bool argument 'visited' to configure if previously visited coordinates should be excluded or not.
-* self.informed_move() returns a legal move with the fewest available successive moves.
-* self.sorted_moves() returns a list of legal moves, sorted according to Warnsdorff’s Rule. It takes in an optional argument 'prob' which determines whether or not the rule is conformed to.
-* self.closed_tour() takes in 2 coordinates as arguments, and returns True if they are one move apart from each other.
+##### `Knight` Class
+This class includes instance methods to simulate a knight chess piece. It contains a `path` attribute which stores visited coordinates, a `Board` object, a `counter` attribute which tracks the number of squares traversed on the board, and a `position` attribute which represents the current coordinate.
+> Instance Methods:
+> - **`available_moves()`** returns a list of legal moves. It takes in an optional bool parameter 'visited' to configure if previously visited coordinates should be excluded or not.
+>
+> - **`informed_move()`** returns a legal move with the fewest available successive moves.
+>
+> - **`sorted_moves()`** returns a list of legal moves, sorted according to Warnsdorff’s Rule. It takes in an optional parameter 'prob' which determines whether or not the rule is conformed to.
+>
+> - **`closed_tour()`** takes in 2 coordinates as parameters, and returns 'True' if they are one move apart from each other.
 
-## search.py
+### search.py
 
-#### Stack Class
-The Stack class was created according to the last-in-first-out principle. This principle was chosen as the approach being used is similar to a depth-first-search: in that we are following the best possible path according to Warnsdorff’s Rule, until a dead-end is reached (no more legal moves available).
-self.remove() handles the removing of a node object from the last position in the frontier while returning the removed node object.
+##### `Stack` Class
+The Stack class was created according to the last-in-first-out principle. This principle was chosen as the approach being used is similar to a depth-first-search: in that the `Knight` object is traversing the best possible path according to Warnsdorff’s Rule, until a dead-end is reached.
+> Instance Methods:
+> - **`remove()`** removes a `Node` object from the last position in the frontier while returning the removed node object.
+>
+> - **`empty()`** returns 'True' if the frontier is empty, and 'False' otherwise.
 
-#### Node Class
-This class is relied on to determine 'branches' in the path of the knight piece. 'coordinate' contains the x,y coordinate of a square the knight piece has visited, and 'next' contains the x,y coordinate of the knight piece's subsequent move.
+##### `Node` Class
+This class is relied on to determine 'branches' in the path of the knight piece. The `coordinate` attribute contains the x,y coordinate of a square the knight piece has visited, and the `next` attribute contains the x,y coordinate of the Knight piece's subsequent possible move.
 
-#### find_KT()
-This function takes in the following 6 arguments:
+##### `find_KT()`
+This function takes in the following 6 parameters:
 - length - length of Board object (defaults to 8)
-- start - start coordinate of Knight object (defaults to (0, 0))
+- start - start coordinate of `Knight` object (defaults to (0, 0))
 - h_prob - probability that Warnsdorff's Rule is conformed to in path finding (defaults to 1)
-- var - 'open' or closed' Knight's Tour variant (defaults to 'OPEN')
+- var - 'OPEN' or CLOSED' Knight's Tour variant (defaults to 'OPEN')
 - limit - maximum number of iterations (defaults to 500000)
 - file_name - name of '.txt' file to write solutions to (defaults to "Open_KT.txt")
 
-Solutions to knight's tours are written directly to 'file_name'.
-The function returns the number of tours found for the given configuration, within the limit allowed.
-1. At any position, Node objects are added to the Stack to keep track of branches in the Knight's path.
-2. A Node is then removed from the Stack, containing the next move to be made.
-3. The Knight is moved to the corresponding coordinate.
-4. If the board has been fully traversed, check if it has completed a closed or open loop. Write solution into file.
-5. If the frontier is empty, then there are no more moves to be played, and the function terminates.
-6. If no more moves can be played from the current position, the **backtrack** function is called.
+Solutions are written directly to 'file_name'.
+The function returns the number of tours found for the given configuration, within the search depth ('limit') allowed.
 
-#### backtrack()
-In this project's implementation of backtracking, we rely on 'coordinate' in the Node class to identify branches in the Knight's path, and remove moves from 'path' in the Knight class until the previous branch is located (last coordinate in 'path' matches 'coordinate' for last node in frontier). Essentially, when backtrack is called:
-1. Move knight piece 1 step back
-2. If current coordinate does not match most recent node's 'coordinate' in frontier, no other moves can be made from current coordinate. Go back to step 1.
-Hence, we recursively call backtrack until a differnt path is found.
+> How it works:
+> 1. At any position, Node objects are added to the Stack to keep track of branches in the Knight's path.
+>
+> 2. A Node is then removed from the Stack, containing the next move to be made.
+>
+> 3. The Knight is moved to the corresponding coordinate.
+>
+> 4. If the board has been fully traversed, check if it has completed a closed or open loop. Write solution into file.
+>
+> 5. If the frontier is empty, then there are no more moves to be played, and the function terminates.
+>
+> 6. If no more moves can be played from the current position, the `backtrack()` function is called.
 
-## analyse.py
+##### `backtrack()`
+In this project's implementation of backtracking, we rely on the `coordinate` attribute in the `Node` class to identify branches in the Knight's path, and remove coordinates from `path` in the Knight class until the most recent coordinate in `path` matches `coordinate` for the last node in the frontier. Essentially, when backtrack is called:
 
-#### analyse_KT()
+> How it works:
+> 1. Move `Knight` object 1 step back while removing its most recent coordinate from `path`.
+>
+> 2. If current coordinate does not match most recent `Node` object's `coordinate` attribute, call `backtrack()` again.
+>
+> 3. If current coordinate matched most recent `Node` object's `coordinate` attribute, the `Knight` object has located the most recent branch in its path. The function returns 'True'.
+>
+> 4. If the length of `path` is 0, the Knight object has exhausted all available branches and can no longer 'backtrack'. The function returns 'False'.
+
+### analyse.py
+
+##### `analyse_KT()`
 This function serves as the core routine, streamlining the search process and organising results in designated output files. 
 It works by calling find_KT for each coordinate on a Board object, and writing its solutions into separate `.txt` files for each coordinate.
 It also writes the number of solutions found from every coordinate into a `.csv` file.
