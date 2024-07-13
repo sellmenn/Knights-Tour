@@ -8,8 +8,8 @@ This project aims to find solutions to both open and closed Knight's Tours varia
 
 # PROJECT TIMELINE
 
-##### Initial objective: Find a single solution to the open variant of the problem, given a starting coordinate.
-The project's scope was initially limited to the open variant of the problem. The code was designed around a naive backtracking approach, incorporating the use of a frontier with a stack configuration, to obtain a single solution, given a starting coordinate. However, upon testing, it was found that past a board size of 7, the code would take too long to run, with iterations in excess of 10000000 required before a single solution could be found. To overcome this obstacle, a version of Warnsdorff’s Rule was used to approach the problem, in addition to backtracking: Always move the knight to an adjacent, unvisited square with minimal degree. Starting from any square, the knight must move to an unvisited square that has the fewest successive moves. With this technique, it was found that only a fraction of the original iterations was required to generate a single solution. 
+> Initial objective: Find a single solution to the open variant of the problem, given a starting coordinate.
+>> The project's scope was initially limited to the open variant of the problem. The code was designed around a naive backtracking approach, incorporating the use of a frontier with a stack configuration, to obtain a single solution, given a starting coordinate. However, upon testing, it was found that past a board size of 7, the code would take too long to run, with iterations in excess of 10000000 required before a single solution could be found. To overcome this obstacle, a version of Warnsdorff’s Rule was used to approach the problem, in addition to backtracking: Always move the knight to an adjacent, unvisited square with minimal degree. Starting from any square, the knight must move to an unvisited square that has the fewest successive moves. With this technique, it was found that only a fraction of the original iterations was required to generate a single solution. 
 
 
 ##### 1st Revision: Find multiple solutions to the open variant of the problem, given a starting coordinate.
@@ -27,12 +27,12 @@ It was observed that the number of closed tours that could be found varied treme
 
 
 # OBTAINED RESULTS
-For board of size 8*8 and search depth of 800000:
+For board of length 8 and search depth of 800000:
 
 | Variant | Tours found | Time / sec |
 | ------- | ----------- | ---------- |
-| Open    | 351986      |   509.80   |
-| Closed  | 60164       |   532.16   |
+| Open    | 351 986     |   509.80   |
+| Closed  | 60 164      |   532.16   |
 
 ---
 
