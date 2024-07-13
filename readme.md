@@ -38,17 +38,18 @@ For board of length 8 and search depth of 800000:
 | Closed  | 60 164      |   532.16   |
 
 ## Usage
-1. Use `pip3 install -r requirements.txt` in your terminal to ensure required modules have been installed.
+1. Use `pip3 install -r requirements.txt` in your terminal to ensure all required modules have been installed.
 2. Command line argument usage: `python3 analyse.py open/closed length` or `python3 analyse.py`.
 
 > Accessing Results:
 >> The program will create an empty directory 'Results' if it does not already exist, where solutions are sorted into individual '.txt' files.
->>> e.g. Open_01.txt for solutions stemming from coordinate (0,1)
+>>> e.g. 'Open_12.txt' for solutions to the open variant stemming from coordinate (1,2).
 >> Data is summarised in a separate csv file 'Open_KT.csv' or 'Closed_KT.csv'.
 
 > Further Configuration:
->> The global variable `MAX` in analyse.py can be varied to adjust the depth of search for each starting coordinate. The default setting of 500000 results in an approximate run-time of 330 seconds.
->> The global variable `H_PROB` in analyse.py can be varied between 0 and 1 to adjust the conformity to Warnsdorff’s Rule.
+>> 
+- The global variable `MAX` in analyse.py can be varied to adjust the depth of search for each starting coordinate. The default setting of 500000 results in an approximate run-time of 330 seconds.
+- The global variable `H_PROB` in analyse.py can be varied between 0 and 1 to adjust the conformity to Warnsdorff’s Rule.
 
 ## PROJECT IMPLEMENTATION
 The project includes three files: 
