@@ -62,16 +62,16 @@ The project includes three files:
 
 #### `Board` Class
 This class includes instance methods to simulate a chess board. The Board class contains a `map` attribute which stores the layout of the board as an array, as well as a `length` attribute.
-> Instance Methods
->> **`create()`** takes in an optional 'map' parameter of type list, and assigns it to the `map` attribute. If none is provided, it defaults to creating a 'map' according to its `length` attribute.
+> Instance Methods:
+> - **`create()`** takes in an optional 'map' parameter of type list, and assigns it to the `map` attribute. If none is provided, it defaults to creating a 'map' according to its `length` attribute.
 >
->> **`mark()`** takes in a 'coordinate' and 'marker' as parameters. It assigns the 'marker' to the coordinate specified in the `map` attribute.
+> - **`mark()`** takes in a 'coordinate' and 'marker' as parameters. It assigns the 'marker' to the coordinate specified in the `map` attribute.
 >
->> **`unmark()`** takes in a single parameter 'coordinate', and resets the coordinate specified in the `map` attribute to '0'.
+> - **`unmark()`** takes in a single parameter 'coordinate', and resets the coordinate specified in the `map` attribute to '0'.
 >
->> **`complete()`** returns 'True' if all coordinates in the `map` attribute have been marked, and 'False' otherwise.
+> - **`complete()`** returns 'True' if all coordinates in the `map` attribute have been marked, and 'False' otherwise.
 >
->> **`check_square()`** returns 'True' if the specified coordinate in the `map` attribute has been marked, and 'False' otherwise.
+> - **`check_square()`** returns 'True' if the specified coordinate in the `map` attribute has been marked, and 'False' otherwise.
 
 #### `Knight` Class
 This class includes instance methods to simulate a knight chess piece. The Knight class contains a 'path' attribute which keeps tracks of coordinates a Knight object has visited, a Board object, a 'counter' attribute which tracks the number of squares it has already traversed on a Board, and a 'position' attribute which represents the Knight object's current coordinate on the Board object.
