@@ -41,7 +41,7 @@ For board of length 8 and search depth of 800000:
 | Open    | 351 986     |   399.91   |
 | Closed  | 60 164      |   405.73   |
 
-For board of length 5 and search depth of 1200000:
+For board of length 5 and search depth of 1000000:
 | Variant | Tours found | Time / sec |
 | ------- | ----------- | ---------- |
 | Open    | 1 616       |   199.18   |
