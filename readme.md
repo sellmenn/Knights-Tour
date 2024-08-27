@@ -26,6 +26,7 @@ It was observed that the number of closed tours that could be found varied betwe
 To allow for easy comparison, the starting coordinate and associated tours are sorted into individual '.txt' files as well as summarised in a '.csv' file.
 
 ##### Future Revisions:
+- Improvements in search times
 - Visual display of number of solutions found for each coordinate on a grid
 - Improve organisation of output files
 - Graph number of solutions found over time
@@ -37,22 +38,23 @@ For board of length 8 and search depth of 800000:
 
 | Variant | Tours found | Time / sec |
 | ------- | ----------- | ---------- |
-| Open    | 351 986     |   509.80   |
-| Closed  | 60 164      |   532.16   |
+| Open    | 351 986     |   399.91   |
+| Closed  | 60 164      |   405.73   |
 
-For board of length 5 and search depth of 1000000:
+For board of length 5 and search depth of 1200000:
 | Variant | Tours found | Time / sec |
 | ------- | ----------- | ---------- |
-| Open    | 1 616       |   265.94   |
+| Open    | 1 616       |   199.18   |
 
 > There are 1728 possible open tours (and 0 closed) for a board of length 5!
 
 ## Usage
 1. Use `pip3 install -r requirements.txt` in your terminal to ensure all required modules have been installed.
-2. Command line argument usage: `python3 analyse.py open/closed length` or `python3 analyse.py`.
+2. Command line argument usage: `python3 analyse.py`.
 
 > Accessing Results:
->> The program will create an empty directory 'Results' if it does not already exist, where solutions are sorted into individual '.txt' files.
+>> The user will be prompted if solutions should be written to .txt files or not in the configuration menu.
+>> If the user chooses to save the solutions, the program will create an empty directory 'Results' if it does not already exist, where solutions are sorted into individual '.txt' files.
 >>> e.g. 'Open_12.txt' for solutions to the open variant stemming from coordinate (1,2).
 >> 
 >>> Data is summarised in a separate csv file 'Open_KT.csv' or 'Closed_KT.csv'.

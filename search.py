@@ -35,7 +35,7 @@ file_name - name of '.txt' file to write solutions to (defaults to "Open_KT.txt"
 Writes solutions for tours found directly to file_name provided.
 Returns the number of tours found for the given configuration, within the limit allowed.
 """
-def find_KT(length=8, start=(0,0), h_prob=1, var="OPEN", limit=500000, file_name="Open_KT.txt"):
+def find_KT(length=8, start=(0,0), h_prob=1, var="OPEN", limit=500000, file_name="Open_KT.txt", write=True):
     # Create Knight object
     piece = Knight(position=start, board=Board(length=length))
     # Access path of Knight object, and create Frontier object
@@ -43,6 +43,7 @@ def find_KT(length=8, start=(0,0), h_prob=1, var="OPEN", limit=500000, file_name
     frontier = Stack()
     # Keep track of number of solutions found
     solution_count = 0
+    backtrack_count = 0
     current_position = piece.position
     # Mark starting position
     piece.board.mark(current_position, piece.counter)
@@ -75,11 +76,11 @@ def find_KT(length=8, start=(0,0), h_prob=1, var="OPEN", limit=500000, file_name
                 if var == "CLOSED" and piece.closed_tour(piece.position, start):
                     solution_count += 1
                     # Write solution into file
-                    write_solution(piece, solution_count, file_name, h_prob, start, var, limit)
+                    if write: write_solution(piece, solution_count, file_name, h_prob, start, var, limit)
                 elif var == "OPEN" and not piece.closed_tour(piece.position, start):
                     solution_count += 1
                     # Write solution into file
-                    write_solution(piece, solution_count, file_name, h_prob, start, var, limit)
+                    if write: write_solution(piece, solution_count, file_name, h_prob, start, var, limit)
             # For new position, find playable moves
             available_moves = piece.sorted_moves(h_prob)
             # If playable moves exist
@@ -91,7 +92,10 @@ def find_KT(length=8, start=(0,0), h_prob=1, var="OPEN", limit=500000, file_name
             # If no playable moves exist, backtrack
             elif not available_moves and frontier.list:
                 backtrack(piece, frontier)
+                backtrack_count += 1
             bar.next()
+    # Print search statistics in terminal
+    print(f"Backtrack Count: {backtrack_count}.")
     return solution_count
 
 
