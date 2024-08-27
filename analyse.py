@@ -62,9 +62,8 @@ def analyse_KT(length=8, limit=500000, h_prob=1, var="OPEN", csv_file="OpenTour.
     start_time = time()
     total_count = 0
     # Write csv file headers
-    if write:
-        with open(f"Results/{csv_file}", "w") as file:
-            file.write("iterations, start coordinate, number of solutions\n")
+    with open(f"Results/{csv_file}", "w") as file:
+        file.write("iterations, start coordinate, number of solutions\n")
     # For each coordinate on the board
     for i in range(length):
         for j in range(length):
@@ -76,10 +75,10 @@ def analyse_KT(length=8, limit=500000, h_prob=1, var="OPEN", csv_file="OpenTour.
             print(f"{solution_count} tours found ({total_count}). ", end="")
             if write:
                 print(f"Refer to Results/{var.capitalize()}_{i}{j}.txt.")
-                # Append count to csv file
-                with open(f"Results/{csv_file}", "a") as file:
-                    file.write(f'{limit}, "{(i, j)}", {solution_count}\n')
             else: print()
+            # Append count to csv file
+            with open(f"Results/{csv_file}", "a") as file:
+                file.write(f'{limit}, "{(i, j)}", {solution_count}\n')
     elapsed_time = time() - start_time
     print(f"\nSearch completed for {var.capitalize()} Knight's Tour in {elapsed_time:.2f} seconds.\nBoard size: {length}*{length}\nH_PROB: {h_prob}\nSearch limit: {limit} / start coordinate\n{total_count} tours found.")
 
