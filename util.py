@@ -5,6 +5,8 @@ class Board:
     def __init__(self, length = 6, map = list()):
         self.length = length
         self.map = self.create(map)
+        self.visited = dict()
+        self.visited_count = 0
 
     # Method to return board as a str object
     def __repr__(self):
@@ -26,25 +28,29 @@ class Board:
 
     # Method to mark coordinate on board with a marker
     def mark(self, coordinate, marker):
+        self.visited[coordinate] = True
+        self.visited_count += 1
         x, y = coordinate
         self.map[x][y] = marker
 
     # Method to unmark position on board
     def unmark(self, coordinate):
+        self.visited[coordinate] = False
+        self.visited_count -= 1
         x, y = coordinate
         self.map[x][y] = 0
 
     # Method to check if all of board has been marked
     def complete(self):
-        for row in self.map:
-            if 0 in row:
-                return False
+        if self.visited_count < self.length ** 2:
+            return False
         return True
 
     # Method to check if a coordinate on board has been marked
     def check_square(self, coordinate):
-        x, y = coordinate
-        if self.map[x][y] == 0:
+        if coordinate not in self.visited:
+            return False
+        elif not self.visited[coordinate]:
             return False
         return True
 
@@ -82,6 +88,8 @@ class Knight():
         return valid_moves
     
     # Method which if given a list of moves, returns a valid move which leads to the position with least available moves
+    """
+    Previous Implementation
     def informed_move(self, moves = list()):
         min_move = 8
         if not moves: 
@@ -92,6 +100,18 @@ class Knight():
                 min_move = degree_of_move
                 best = move
         return best
+    """
+    
+    # Method which if given a list of moves, returns a list of tuples containing degree-move pairs
+    def informed_moves(self, moves = list()):
+        informed_moves = list()
+        if not moves: moves = self.available_moves()
+        for move in moves:
+            degree_of_move = len(self.available_moves(position=move)) # number of subsequent available moves
+            informed_moves.append((degree_of_move, move))
+        informed_moves.sort(reverse=True)
+        return informed_moves
+
     
     # Method to return sorted list of valid moves in decreasing order of next available moves
     def sorted_moves(self, prob = 0):
@@ -100,12 +120,18 @@ class Knight():
         if shuffle_moves:
             shuffle(valid_moves)
             return valid_moves
-        sorted_moves = []
+        sorted_moves = list()
+        """
+        Previous implementation:
         while valid_moves:
             best_move = self.informed_move(valid_moves)
             sorted_moves.append(best_move)
             valid_moves.remove(best_move)
         sorted_moves.reverse()
+        """
+        informed_moves = self.informed_moves(valid_moves)
+        for move in informed_moves:
+            sorted_moves.append(move[1])
         return sorted_moves
     
     # Method to move knight to new position
